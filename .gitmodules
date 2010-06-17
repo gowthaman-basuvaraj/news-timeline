@@ -1,0 +1,3 @@
+[submodule "kohana/modules/MangoDB"]
+	path = kohana/modules/MangoDB
+	url = http://github.com/Wouterrr/MangoDB.git
