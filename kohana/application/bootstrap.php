@@ -50,8 +50,8 @@ ini_set('unserialize_callback_func', 'spl_autoload_call');
  * - boolean  caching     enable or disable internal caching                 FALSE
  */
 Kohana::init(array(
-	'base_url'   => '/',
-	'index_file' => FALSE,
+	'base_url'   => '/news',
+	'index_file' => 'index.php',
 ));
 
 /**
@@ -76,6 +76,7 @@ Kohana::modules(array(
 	// 'orm'        => MODPATH.'orm',        // Object Relationship Mapping
 	// 'pagination' => MODPATH.'pagination', // Paging of results
 	// 'userguide'  => MODPATH.'userguide',  // User guide and API documentation
+            'MangoDB'   => MODPATH.'MangoDB',    // Mongo Wrapper
 	));
 
 /**
