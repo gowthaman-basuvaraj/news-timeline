@@ -1,10 +1,10 @@
 <?php
-class Model_File extends Mango {
+class Model_File extends basemodel {
 
     protected $_relations = array(
         'user'              => array('type' => 'belongs_to'),
         'item'              => array('type' => 'belongs_to'),
-        'news'              => array('type' => 'belongs_to'),
+        'story'              => array('type' => 'belongs_to'),
 
     );
     protected $_fields = array(

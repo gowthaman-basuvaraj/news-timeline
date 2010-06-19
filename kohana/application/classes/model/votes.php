@@ -1,13 +1,17 @@
 <?php
-class Model_Vote extends Mango {
+
+class Model_Vote extends basemodel {
+
     protected $_fields = array(
-        'type'              => array('type'=>'enum', 'values'=>array("1"=>"Like", "2"=>"dislike")),
+        'type' => array('type' => 'enum', 'values' => array( "Like",  "Dislike")),
     );
     protected $_relations = array(
-        'user'              => array('type' => 'belongs_to'),
-        'item'              => array('type' => 'belongs_to'),
-        'news'              => array('type' => 'belongs_to'),
+        'user' => array('type' => 'belongs_to'),
+        'item' => array('type' => 'belongs_to'),
+        'comment' => array('type' => 'belongs_to'),
+        'story' => array('type' => 'belongs_to'),
     );
-    protected $_db  = "news_votes";
+    protected $_db = "news_votes";
+
 }
 ?>

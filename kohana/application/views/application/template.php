@@ -13,25 +13,30 @@
             </head>
             <body>
                 <ul>
+            <?php if (Session::instance()->get("user", null) == null) : ?>
                     <li><?php echo HTML::anchor("account/login", "Login"); ?></li>
+
                     <li><?php echo HTML::anchor("account/create", "Create"); ?></li>
-            <?php if (Session::instance()->get("user", null) != null) : ?>
-                    <li><?php echo HTML::anchor("account/logout", "Logout"); ?></li>
+            <?php else: ?>
+                        <li><?php echo HTML::anchor("welcome/index", "Home"); ?></li>
+                        <li><?php echo HTML::anchor("account/logout", "Logout"); ?></li>
             <?php endif; ?>
-                </ul>
+                    </ul>
+        <?php if (is_array($messages)) : ?>
+        <?php foreach ($messages as $message_type => $message_array) : ?>
+                                <div class="messages-<?php echo $message_type ?>">
 
-<?php foreach ($messages as $message_type => $message_array) : ?>
-                    <div class="messages-<?php echo $message_type ?>">
+            <?php foreach ($message_array as $message_value) : ?>
+                                    <div class="message-item"><?php echo $message_value ?></div>
+            <?php endforeach ?>
+                                </div>
+        <?php endforeach; ?>
 
-<?php foreach ($message_array as $message_value) : ?>
-                                <div class="message-item"><?php echo $message_value ?></div>
-<?php endforeach ?>
-                        </div>
-<?php endforeach; ?>
-                        <script type="text/javascript">
+        <?php endif; ?>
+                                    <script type="text/javascript">
 <?php echo json_encode($form_errors) ?>
-                            </script>
+                                    </script>
 
-<?php echo $content ?>
+        <?php echo $content ?>
     </body>
 </html>

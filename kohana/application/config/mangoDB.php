@@ -1,9 +1,42 @@
 <?php
 
 return array(
-	'default' => array(
-		'hostnames' => '192.168.226.128',
-		'database'  => 'example',
-		'profiling' => FALSE
-	)
+    'default' => array(
+        'hostnames' => 'localhost',
+        'database' => 'example',
+        'profiling' => FALSE
+    ),
+    'news_news' => array(
+        'hostnames' => 'localhost',
+        'database' => 'news_news',
+        'profiling' => FALSE
+    ), 'news_items' => array(
+        'hostnames' => 'localhost',
+        'database' => 'news_items',
+        'profiling' => FALSE
+    ), 'news_votes' => array(
+        'hostnames' => 'localhost',
+        'database' => 'news_votes',
+        'profiling' => FALSE
+    ), 'news_links' => array(
+        'hostnames' => 'localhost',
+        'database' => 'news_links',
+        'profiling' => FALSE
+    ), 'news_files' => array(
+        'hostnames' => 'localhost',
+        'database' => 'news_files',
+        'profiling' => FALSE
+    ), 'news_comments' => array(
+        'hostnames' => 'localhost',
+        'database' => 'news_comments',
+        'profiling' => FALSE
+    ), 'news_users' => array(
+        'hostnames' => 'localhost',
+        'database' => 'news_users',
+        'profiling' => FALSE
+    ), 'news_dayitems' => array(
+        'hostnames' => 'localhost',
+        'database' => 'news_dayitems',
+        'profiling' => FALSE
+    )
 );

@@ -22,7 +22,8 @@ class Controller_Base extends Controller_Template {
         $this->session = Session::instance();
         $this->accountutils = new accountutils();
         $this->logged_in = $this->session->get("authorized", false);
-
+        $this->logged_user = $this->session->get("user", null);
+        
         if ($this->auto_render) {
             // Initialize empty values
             $this->template->title = '';
@@ -72,7 +73,7 @@ class Controller_Base extends Controller_Template {
                 $messages[$type] = Array();
             }
             $messages[$type][] = $message;
-            $this->session->set("messages", $message);
+            $this->session->set("messages", $messages);
         } else {
             $form_errors[] = $message;
              $this->session->set("form_errors", $form_errors);
