@@ -1,4 +1,10 @@
-<form name="create-account" action="<?php echo Kohana::$base_url."index.php/news/add"?>" method="POST">
+<?php 
+$form_url = Kohana::$base_url."index.php/news/add";
+if($original_story!=null && $original_story->loaded()){
+    $form_url .="/$original_story->url_title";
+}
+?>
+<form name="create-account" action="<?php echo $form_url?>" method="POST">
     <div class="form-item">
         <div class="form-label required">Title</div>
         <input placeholder="Title of the News" class="form-text required" type="text" name="title" value="<?php echo $news->title ?>" />

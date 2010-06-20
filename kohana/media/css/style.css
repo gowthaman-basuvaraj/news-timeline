@@ -10,8 +10,155 @@
    TODO customize this sample style
    Syntax recommendation http://www.w3.org/TR/REC-CSS2/
 */
+h1, h2, h3, h4, h5, h6 {
+    padding: 0;
+    margin: 0;
+    font-weight: lighter;
+}
+.site-header {
 
-root { 
-    display: block;
+    margin: 9px;
+}
+.site-header-menu {
+    height: 44px;
+    margin: 10px 0px;
+}
+body { 
+    width: 1024px;
+    margin: auto;
+}
+ul.menu-links {
+    padding-left: 0px;
+    float: right;
+}
+ul.menu-links li {
+    display: inline;
+
+}
+ul.menu-links li a{
+    font-size: large;
+    -moz-border-radius: 3px;
+    border: 1px solid #ccc;
+    color: #888;
+    background-color: #FFF;
+}
+ul.menu-links li a:hover{
+    background-color: #CCC;
+    color: #FFF;
+}
+.news-list-item {
+    float: left;
+    width: 400px;
+    border: 1px solid #BBBCBF !important;
+    margin: 5px 10px;
+    -moz-border-radius: 9px;
+    padding: 5px 5px 5px 20px;
+}
+.news-list-title a{
+
+}
+.news-list-title {
+    font-size: large;
+    text-transform: capitalize;
+}
+.news-list-desc {
+    font-style: italic;
+    margin: 9px;
+    max-height: 168px;
+    max-width: 360px;
+    line-height: 24px;
+    overflow: hidden;
+    text-align:justify;
+}
+.news-list-actions {
+    float:right;
+}
+ul {
+    list-style: none;
+}
+.news-page-desc {
+   margin: 12px;
+    font-style: italic;
+    max-width: 600px;
+    float:left;
+    text-align:justify;
+}
+ul.news-page-items {
+    float: right;
+}
+.clear-line {
+    clear:both;   
 }
 
+.news-followup-items {
+    margin: 0px 0px 0px 25px;
+}
+.news-page-container {
+    width:1000px;
+    margin:auto;
+    -moz-border-radius:7px !important;
+    -webkit-border-radius:7px !important;
+    margin-left:10px!important;
+    margin-top:0px!important;
+    margin-bottom:8px!important;
+
+    
+    border:1px solid #bbbcbf !important;
+    padding-left:5px!important;
+    padding-top:5px!important;
+    padding-right:8px!important;
+    padding-bottom:0px!important;
+    
+    background-color:#ffffff !important;
+}
+.news-page-followupitem {
+    padding: 12px;
+}
+
+.news-followup-item-container, .news-page-comment-item  {
+    -moz-border-radius:7px !important;
+    -webkit-border-radius:7px !important;
+    margin-left:10px!important;
+    margin-right:31px!important;
+    margin-top:0px!important;
+    margin-bottom:8px!important;
+
+    
+    border:1px solid #bbbcbf !important;
+    padding-left:5px!important;
+    padding-top:5px!important;
+    padding-right:8px!important;
+    padding-bottom:0px!important;
+    
+    background-color:#ffffff !important;
+}
+.followup-item-odd {
+     background-color:#F7F7F8 !important;
+
+}
+.followup-item-even {
+    background-color:#ffffff !important;
+   
+
+}
+.news-page-followup-list-actions {
+    margin-left: 90%;
+}
+.news-page-title {
+    font-size: 24pt;
+    font-weight: bold;
+    text-transform: capitalize;
+    
+}
+.news-page-title *{
+    font-size: large;
+    display: inline;
+}
+.new-page-title-sep {
+    margin: 0px 5px;
+}
+.news-page-comments-postedby {
+    display: inline;
+    font-style: italic;
+    font-size: small;
+}

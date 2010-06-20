@@ -1,3 +1,6 @@
 [submodule "kohana/modules/MangoDB"]
 	path = kohana/modules/MangoDB
 	url = http://github.com/Wouterrr/MangoDB.git
+[submodule "utils/python-readability"]
+	path = utils/python-readability
+	url = http://github.com/gfxmonk/python-readability.git

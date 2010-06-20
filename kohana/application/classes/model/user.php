@@ -26,7 +26,9 @@ class Model_User extends basemodel {
         'likes' => array('type' => 'counter'),
         'dislikes' => array('type' => 'counter'),
         'stories' => array('type'=>'has_many'),
-        'items' => array('type'=>'has_many')
+        'comments' => array('type'=>'has_many'),
+        'links' => array('type'=>'has_many'),
+       
     );
     protected $_db = 'news_users';
 

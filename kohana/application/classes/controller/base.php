@@ -17,7 +17,7 @@ class Controller_Base extends Controller_Template {
      * set up default values. These variables are then available to our
      * controllers if they need to be modified.
      */
-    public function before() {
+    public function before() {        
         parent::before();
         $this->session = Session::instance();
         $this->accountutils = new accountutils();

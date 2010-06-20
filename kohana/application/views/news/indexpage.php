@@ -4,7 +4,7 @@
     <?php endif; ?>
     </ul>
     <p>Welcome <?php echo $user->username ?></p>
-
+    <div class="news-list-container">
 <?php foreach($today_news->stories as $news): ?>
    
     <div class="news-list-item">
@@ -14,6 +14,7 @@
         </div>
         <div class="news-list-desc">
         <?php echo $news->description ?>
+            
         </div>
         <div class="news-list-actions">
             <ul>
@@ -22,3 +23,4 @@
         </div>
     </div>
 <?php endforeach; ?>
+    </div>
