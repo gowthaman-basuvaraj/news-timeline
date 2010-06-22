@@ -23,6 +23,7 @@ class Model_Comment extends basemodel {
         'humanizeid'        => array('type' => 'int'),
         'links'             => array('type' =>  'has_many'),//TODO Later
         'files'             => array('type' =>  'has_many'),//TODO later
+        'children_comments'             => array('type' =>  'array'),
     );
 
     protected $_db = "news_comments";

@@ -46,11 +46,13 @@ class Controller_Base extends Controller_Template {
                 'media/css/screen.css' => 'screen, projection',
                 'media/css/print.css' => 'print',
                 'media/css/style.css' => 'screen',
+                'media/external/jqui_smoothness/jquery-ui-1.8.2.custom.css' => 'screen',
             );
 
             $scripts = array(
                 'http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js',
                 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.2/jquery-ui.min.js',
+                'media/js/utils.js',
             );
 
             $this->template->styles = array_merge($this->template->styles, $styles);

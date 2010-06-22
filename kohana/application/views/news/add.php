@@ -13,7 +13,13 @@ if($original_story!=null && $original_story->loaded()){
     <div class="form-item">
         <div class="form-label required">Description</div>
         <textarea placeholder="Description of the news" class="form-textarea required"  name="description"  ><?php echo $news->description ?></textarea>
-    </div>   
+    </div>  
+    
+    <div class="form-item">
+        <div class="form-label required">Date Of the News</div>
+        <input placeholder="Date of the News" id="story_date-date" class="date-picker form-text required" type="text" value="<?php echo date("d-m-Y",$news->story_date) ?>" />
+        <input type="hidden" name="story_date"  id="story_date"/>
+    </div>  
 
      <div class="form-item">
         <div class="form-label">Link</div>

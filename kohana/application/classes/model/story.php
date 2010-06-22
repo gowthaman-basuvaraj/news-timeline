@@ -13,7 +13,7 @@ class Model_Story extends basemodel {
         'story' => array('type' => 'belongs_to'),
     );
     protected $_fields = array(
-        'title' => array('type' => 'string'),
+        'title' => array('type' => 'string','required'=>TRUE),
         'items' => array('type' => 'has_many'),
         'comments' => array('type' => 'has_many'),
         'description' => array('type' => 'string'),
@@ -26,6 +26,7 @@ class Model_Story extends basemodel {
         'humanizeid' => array('type' => 'int'),
         'url_title' => array('type' => 'string'),
         'story_depth'     => array('type'=>'int', 'default'=>1),//allow only some levels
+        'story_date'    => array('type'=>'int','required'=>TRUE, "default"=>-1), //date of the story 
     );
     protected $_db = "news_news";
 

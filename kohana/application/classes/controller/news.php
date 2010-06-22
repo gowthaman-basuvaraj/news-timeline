@@ -39,10 +39,12 @@ class Controller_news extends Controller_Base {
                 $values = $_POST;
                 $tdy_news = newsutils::get_next_id();
                 $values["humanizeid"] = (int) (date("ymd") . $tdy_news->news_count);
+
                 $values["url_title"] = $values["humanizeid"] . "_" . Kohana_Inflector::underscore(
-                                filter_var($values["title"],
+                                filter_var(preg_replace("/[^a-zA-Z0-9\\s]/", "", $values["title"]),
                                         FILTER_SANITIZE_STRING,
-                                        FILTER_FLAG_STRIP_LOW | FILTER_FLAG_STRIP_HIGH));
+                                        FILTER_FLAG_STRIP_LOW | FILTER_FLAG_STRIP_HIGH | FILTER_FLAG_STRIP_BACKTICK));
+
                 $values["daystory_id"] = $tdy_news->_id . "";
 
                 if ($original_story != NULL) {
@@ -50,15 +52,34 @@ class Controller_news extends Controller_Base {
                     $values['story_depth'] = $original_story->story_depth + 1;
                 } else {
                     $values['story_id'] = new MongoId();
-                     $values['story_depth'] =  1;
+                    $values['story_depth'] = 1;
                 }
+                if (isset($values['story_date'])) {
+                    $values['story_date'] = (int) ( $values['story_date'] / 1000);
+                }
+                
                 $values = $news->check($values);
                 $news->values($values);
                 $news->create();
+                $readability = new Readability();
+                $fetcher = new Contentfetcher();
                 foreach ($linkObjects as $linkObject) {
+
                     $news->add($linkObject);
                     $linkObject->values(array("story_id" => $news->_id, "user_id" => $this->logged_user->_id . ""));
                     $linkObject->update();
+                    //TODO move it to gearman client
+                    //todo make url parsing, to default readable content
+                    //such as
+                    //single page
+                    //print view etc...
+                    //also get favicon
+
+                    $content_div = $readability->grabArticle($fetcher->get_htmlpage($linkObject->url));
+                    $favicon = $this->GetMainBaseFromURL($linkObject->url);
+                    $content_html = $content_div->ownerDocument->saveXML($content_div);
+                    $linkObject->values(array("readable_text" => $content_html, "favicon"=>$favicon."favicon.ico"));
+
                     $this->logged_user->add($linkObject);
                     $this->logged_user->update();
                 }
@@ -84,7 +105,34 @@ class Controller_news extends Controller_Base {
                 $this->add_message($ve->array->errors(), "form-errors");
             }
         }
+        if ($news->story_date == -1) {
+            $news->story_date = date("U");
+        }
+
         $this->template->content = View::factory("news/add", array("news" => $news, "original_story" => $original_story));
+    }
+
+    function GetMainBaseFromURL($url) {
+        $chars = preg_split('//', $url, -1, PREG_SPLIT_NO_EMPTY);
+
+        $slash = 3; // 3rd slash
+
+        $i = 0;
+
+        foreach ($chars as $key => $char) {
+            if ($char == '/') {
+                $j = $i++;
+            }
+
+            if ($i == 3) {
+                $pos = $key;
+                break;
+            }
+        }
+
+        $main_base = substr($url, 0, $pos);
+
+        return $main_base . '/';
     }
 
     public function action_view($news_title) {
@@ -100,7 +148,7 @@ class Controller_news extends Controller_Base {
 
 
         $original_story = Mango::factory("story")->load(1, NULL, NULL, array(), array("url_title" => $story_urltitle));
-        if(!$original_story->loaded()){
+        if (!$original_story->loaded()) {
             //todo 404
         }
         $original_comment = NULL;
@@ -130,7 +178,7 @@ class Controller_news extends Controller_Base {
                 $tdy_news = newsutils::get_next_id();
                 $values["humanizeid"] = (int) (date("ymd") . $tdy_news->news_count);
                 $values["url_title"] = $values["humanizeid"] . "_" . Kohana_Inflector::underscore(
-                                filter_var($values["title"],
+                                filter_var(preg_replace("/[^a-zA-Z0-9\\s]/", "", $values["title"]),
                                         FILTER_SANITIZE_STRING,
                                         FILTER_FLAG_STRIP_LOW | FILTER_FLAG_STRIP_HIGH));
                 $values["daystory_id"] = $tdy_news->_id . "";
@@ -145,7 +193,7 @@ class Controller_news extends Controller_Base {
                 } else {
                     $values['story_id'] = new MongoId();
                 }
-                
+
                 $values = $comment->check($values);
                 $comment->values($values);
                 $comment->create();
@@ -161,6 +209,10 @@ class Controller_news extends Controller_Base {
                 $tdy_news->update();
                 $this->logged_user->add($comment);
                 $this->logged_user->update();
+                 if ($original_comment != NULL) {
+                    $original_comment->children_comments[] = $comment;
+                    $original_comment->update();
+                }
                 if ($original_story != NULL) {
                     $original_story->add($comment);
                     $original_story->update();
@@ -178,7 +230,8 @@ class Controller_news extends Controller_Base {
                 $this->add_message($ve->array->errors(), "form-errors");
             }
         }
-        $this->template->content = View::factory("news/comment", array("comment" => $comment, "original_story" => $original_story));
+        $this->request->redirect("news/view/$original_story->url_title");
+        
     }
 
 }

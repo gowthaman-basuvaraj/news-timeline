@@ -16,6 +16,8 @@ class Model_Link extends basemodel {
         'updated'           => array('type' => 'int'),
         'dead'              => array('type' => 'boolean', 'default'  =>False),
         'reported_deadcount'=> array('type' => 'counter'),
+        'readable_text'     =>array('type'=>'string'),
+        'favicon'           =>array('type'=>'string'),
     );
 
     protected $_db = "news_links";
