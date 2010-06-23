@@ -24,6 +24,7 @@ class Model_Comment extends basemodel {
         'links'             => array('type' =>  'has_many'),//TODO Later
         'files'             => array('type' =>  'has_many'),//TODO later
         'children_comments'             => array('type' =>  'array'),
+        'deleted'           => array('type'=> 'boolean', 'default'=>FALSE)
     );
 
     protected $_db = "news_comments";

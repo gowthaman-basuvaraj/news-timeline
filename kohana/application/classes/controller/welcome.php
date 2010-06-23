@@ -6,7 +6,9 @@ class Controller_Welcome extends Controller_Base {
 	{
                 $user = $this->session->get("user", null);
                 $tdy_news = newsutils::get_todaynews();
+                
                 $data = array("user"=>$user, "today_news"=>$tdy_news);
+                $data['stories'] = Mango::factory("story")->load(10, array("humanizeid"=>1), NULL, array(), array());
                 if(null != $user){
                     $this->template->content = View::factory("news/indexpage", $data);
                 }else {

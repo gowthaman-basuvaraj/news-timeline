@@ -46,7 +46,7 @@ class Controller_news extends Controller_Base {
                                         FILTER_FLAG_STRIP_LOW | FILTER_FLAG_STRIP_HIGH | FILTER_FLAG_STRIP_BACKTICK));
 
                 $values["daystory_id"] = $tdy_news->_id . "";
-
+                $values['description'] = nl2br($values['description']);
                 if ($original_story != NULL) {
                     $values['story_id'] = $original_story->_id . "";
                     $values['story_depth'] = $original_story->story_depth + 1;
@@ -138,10 +138,21 @@ class Controller_news extends Controller_Base {
     public function action_view($news_title) {
         $news = Mango::factory("story")->load(1, NULL, NULL, array(), array("url_title" => $news_title));
         if ($news->loaded()) {
-            $this->template->content = View::factory("news/view", array("news" => $news));
+          $story_comments = Mango::factory("comment")->load(NULL, NULL, NULL, array(), array("story_id"=>$news->_id));
+            $this->template->content = View::factory("news/view", array("news" => $news, "logged_user"=>$this->logged_user, "story_comments"=>$story_comments));
         } else {
             //todo related or so and so...
         }
+    }
+    public function action_comment_delete($story_urltitle, $original_comment_title) {
+      //TODO check user permission
+      $comment = Mango::factory("comment")->load(1, NULL, NULL, array(),array("url_title"=>$original_comment_title));
+      if($comment->loaded()){
+        $comment->values(array("title"=>"[deleted]", "comment_body"=>"", "user_id"=>new MongoId(), 'deleted'=>TRUE))->update();
+        die(Kohana::debug($comment->as_array()));
+      }
+      die("OK NOT");
+      
     }
 
     public function action_comment($story_urltitle, $original_comment_title=NULL) {
@@ -214,8 +225,8 @@ class Controller_news extends Controller_Base {
                     $original_comment->update();
                 }
                 if ($original_story != NULL) {
-                    $original_story->add($comment);
-                    $original_story->update();
+                    //$original_story->add($comment);
+                    //$original_story->update();
                     $this->request->redirect("news/view/$original_story->url_title#$comment->url_title");
                 } else {
                     $this->request->redirect("news/view/$original_story->url_title");

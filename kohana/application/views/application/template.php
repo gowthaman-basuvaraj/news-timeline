@@ -25,12 +25,12 @@
                 <div class="site-header">                
                     <div class="site-header-menu">                
                         <ul class="menu-links">                
+                          <li><?php echo HTML::anchor("welcome/index", "Home"); ?></li>
                     <?php if (Session::instance()->get("user", null) == null) : ?>
                         <li><?php echo HTML::anchor("account/login", "Login"); ?></li>
     
                         <li><?php echo HTML::anchor("account/create", "Create"); ?></li>
-                    <?php else: ?>
-                            <li><?php echo HTML::anchor("welcome/index", "Home"); ?></li>
+                    <?php else: ?>                            
                             <li><?php echo HTML::anchor("account/logout", "Logout"); ?></li>
                     <?php endif; ?>
                         </ul>                

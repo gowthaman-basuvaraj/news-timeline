@@ -132,8 +132,9 @@ ul.news-page-items {
   background-color:#ffffff;
 }
 .news-page-comment-item {
-  margin:0 5px 10px;
-  padding:5px 5px 0;
+  margin: 15px;
+  display:block;
+  clear:both;
 }
 .followup-item-odd {
   background-color:#F7F7F8;
@@ -226,7 +227,7 @@ input[type=reset] {
 .hidden {
   display: none;
 }
-.comment-reply-form-container {
+.comment-reply-form-container, .comment-form-container {
   background-color:#E6EFC2;
   margin:10px;
   padding:10px;
@@ -234,9 +235,11 @@ input[type=reset] {
 }
 a.news-page-comment-title {
   font-weight: bold;
+  margin-left: 10px;
 }
 .news-page-comment-item-title  {
   line-height: 24px;
+  float:left;
 }
 .news-page-comment-item-desc {
   margin: 5px;
@@ -277,12 +280,80 @@ a.news-page-comment-title {
   height: 180px;
   max-width: 180px;
 }
-.news-page-comment-item.expanded > * {
-  display: block;
+
+.container-title {
+  font-weight: bold;
+  margin: 0 0 10px 0;
 }
-.news-page-comment-item.collapsed > * {
+.news-page-comment-item-action ul{
+  margin: 0;
+  padding: 0;
+}
+.news-page-comment-item-action ul li {
+  display: inline;
+}
+.vote-panel {
+  width: 25px;
+  float: left;
+}
+.collapsed .vote-panel {
+  display:none;
+}
+.collapsed news-page-comment-title {
   display: none;
 }
-.news-page-comment-item.collapsed > div.news-page-comment-item-title  {
-  display: block;
+.comment-item-panel {
+
+}
+.vote {
+  padding: 0 0 0 25px;
+  background-repeat: no-repeat;
+  background-position:  -2px -2px;
+  color: #444;
+  background-color: #d2f1cb;
+  -moz-border-radius: 2px;
+  line-height: 16px;
+}
+.vote.no-img {
+  padding: 0;
+}
+.vote.decided.agree {
+  background-color: #00aa00;
+}
+.vote.decided.disagree {
+  background-color: #E33100;
+}
+.vote.decided {
+  color: #fff;
+}
+.vote.agree {
+  background-image: url("../icons/yes.png");
+  
+}
+.vote.disagree{
+  background-image: url("../icons/no.png");
+}
+.comment-toggle {
+  font-size: small;
+  margin-left: 10px;
+}
+.comment-item-content {
+
+}
+.comment-list-votes {
+  display:inline;
+  font-size:small;
+  font-weight:lighter;
+}
+.news-page-comment-item-action {
+  line-height: 32px;
+  vertical-align: middle;
+}
+.home-page-latest-comment {
+  background-color: #f0eb96;
+  padding: 10px;
+}
+.home-page-latest-comment-title {
+  color: #00aa00;
+  margin-bottom: 5px;
 }
