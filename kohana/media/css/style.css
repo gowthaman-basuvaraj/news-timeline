@@ -17,15 +17,41 @@ h1, h2, h3, h4, h5, h6 {
 }
 .site-header {
 
-  margin: 9px;
+  background-color:#657500;
+}
+.site-content {
+
+  color:#000
+}
+.left-content {
+  width: 810px;
+  float:left;
+  /*background-color: #C7DBA9;*/
+  padding:20px;
+}
+.right-content {
+  width: 250px;
+  float: left;
 }
 .site-header-menu {
   height: 44px;
   margin: 10px 0px;
 }
 body { 
-  width: 1024px;
+  width: 1124px;
   margin: auto;
+  font-size: 12pt;
+
+}
+a, a:visited {
+  color: #888;
+}
+a:hover {
+  background-color: #E6EFC2;
+  color: #000;
+}
+a.no-href {
+  color: #000;
 }
 ul.menu-links {
   padding-left: 0px;
@@ -33,26 +59,34 @@ ul.menu-links {
 }
 ul.menu-links li {
   display: inline;
-
+  position: relative;
 }
 ul.menu-links li a{
   font-size: large;
-  -moz-border-radius: 3px;
-  border: 1px solid #ccc;
+  padding: 1px 5px;
+  margin: 1px 5px;
   color: #888;
   background-color: #FFF;
+  text-decoration: none;
 }
-ul.menu-links li a:hover{
-  background-color: #CCC;
-  color: #FFF;
+ul.menu-links li a:hover, a.nav-a.clicked{
+  background-color: #E6EFC2;
+  color: #000;
+}
+.news-list-container {
+
+  overflow: auto;
 }
 .news-list-item {
-  float: left;
-  width: 400px;
-  border: 1px solid #BBBCBF;
-  margin: 5px 10px;
-  -moz-border-radius: 9px;
-  padding: 5px 5px 5px 20px;
+  display:block;
+
+  /*border: 1px solid #0D3257;
+  -moz-border-radius: 9px;*/
+  overflow: auto;
+
+  margin: 5px;
+  padding: 5px;
+  color: #0d3257
 }
 .news-list-title a{
 
@@ -62,24 +96,26 @@ ul.menu-links li a:hover{
   text-transform: capitalize;
 }
 .news-list-desc {
-  font-style: italic;
-  margin: 9px;
-  max-height: 168px;
-  max-width: 360px;
+
+  max-height: 72px;
   line-height: 24px;
   overflow: hidden;
-  text-align:justify;
+
+}
+.news-list-others {
+  background-color: #F7F3E8;
+  margin: 10px 0;
+  padding: 10px 0;
 }
 .news-list-actions {
   float:right;
 }
 ul {
   list-style: none;
+
 }
 .news-page-desc {
   margin: 12px;
-  font-style: italic;
-
   text-align:justify;
 }
 ul.news-page-items {
@@ -93,20 +129,14 @@ ul.news-page-items {
   margin: 0px 0px 0px 25px;
 }
 .news-page-container {
-  width:1000px;
+
   margin:auto;
   -moz-border-radius:7px;
   -webkit-border-radius:7px;
-  margin-left:10px;
-  margin-top:0px;
-  margin-bottom:8px;
 
-
+  padding: 20px;
   border:1px solid #bbbcbf;
-  padding-left:5px;
-  padding-top:5px;
-  padding-right:8px;
-  padding-bottom:0px;
+
 
   background-color:#ffffff;
 }
@@ -149,7 +179,7 @@ ul.news-page-items {
   margin-left: 90%;
 }
 .news-page-title {
-  font-size: 24pt;
+  font-size: 16pt;
   font-weight: bold;
   text-transform: capitalize;
 
@@ -170,7 +200,7 @@ textarea {
   width: 400px;
   height: 100px;
 }
-.comment-reply-form-container  input[type=text] {
+.comment-reply-form-container  input.long-text {
   width: 400px;
 }
 img {
@@ -306,32 +336,40 @@ a.news-page-comment-title {
 
 }
 .vote {
-  padding: 0 0 0 25px;
+  /*padding: 0 0 0 25px;*/
   background-repeat: no-repeat;
   background-position:  -2px -2px;
   color: #444;
-  background-color: #d2f1cb;
+
   -moz-border-radius: 2px;
   line-height: 16px;
 }
 .vote.no-img {
   padding: 0;
+  margin-right: 5px;
+  color: #657500;
+
+}
+.vote.no-img:hover {
+  color: #FFF;
+  background-color: #657500;
+  border: 1px solid #C7DBA9;
 }
 .vote.decided.agree {
   background-color: #00aa00;
 }
 .vote.decided.disagree {
-  background-color: #E33100;
+  background-color: #BD9A52;
 }
 .vote.decided {
   color: #fff;
 }
 .vote.agree {
-  background-image: url("../icons/yes.png");
-  
+  /*background-image: url("../icons/yes.png");*/
+
 }
 .vote.disagree{
-  background-image: url("../icons/no.png");
+  /*background-image: url("../icons/no.png");*/
 }
 .comment-toggle {
   font-size: small;
@@ -350,10 +388,27 @@ a.news-page-comment-title {
   vertical-align: middle;
 }
 .home-page-latest-comment {
-  background-color: #f0eb96;
+  clear:both;
   padding: 10px;
 }
 .home-page-latest-comment-title {
   color: #00aa00;
-  margin-bottom: 5px;
+
+  width: 200px;
+  float:left;
+}
+
+.quick-form {
+  position:absolute;
+  right:0;
+  top:10px;
+  width:185px;
+  z-index: 100;
+}
+
+.item-odd {
+  
+}
+.item-even {
+  
 }

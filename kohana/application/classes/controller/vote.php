@@ -33,11 +33,16 @@ class Controller_Vote extends Controller_Base {
           "comment_id"=>$comment->_id."",
           "type"=>$num,
       ))->update();
+       if($num==1){
+         $comment->dislikes->decrement();
+       }else {
+          $comment->likes->decrement();
+       }
     }
     if($num==1)
       $comment->likes->increment();
     else
-      $comment->likes->decrement();
+      $comment->dislikes->increment();
     $comment->update();
     die("ok");
   }

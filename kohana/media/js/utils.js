@@ -5,9 +5,33 @@
 $(document).ready(function(){
   $(".comment-reply-link").click(function(){
     action_url = base_url+"index.php/news/comment/"+$(this).attr("news")+"/"+$(this).attr("comment");
-    $(".comment-reply-form-container").find("form").attr("action", action_url)
-    $(this).after($(".comment-reply-form-container").toggle());
+    $(".comment-reply-form-container.comment").find("form").attr("action", action_url)
+    $(this).after($(".comment-reply-form-container.comment").toggle());
   });
+  $(".add-followup-link").click(function(){
+   $(".comment-reply-form-container.story").toggle()
+  });
+  
+  $("a.nav-a").click(function(e){
+    elem = $(e.target);
+    if(elem.next(".quick-form").length==0){
+      return true;
+    }else {
+      $(".quick-form").hide();
+      
+      if(!elem.hasClass("clicked")){
+        $(".clicked").removeClass("clicked");
+        elem.addClass("clicked");
+        elem.next(".quick-form").show();
+      }else {
+        elem.removeClass("clicked");
+        elem.next(".quick-form").hide();
+      }
+      e.preventDefault();
+      return false;
+    }
+    
+  })
   $(".comment-delete-link").click(function(e){
     action_url = base_url+"index.php/news/comment_delete/"+$(this).attr("news")+"/"+$(this).attr("comment");
     var conf = confirm("You want to delete this comment?");
@@ -40,6 +64,20 @@ $(document).ready(function(){
       $(this).removeClass("close");
     }
     $(this).next(".comment-item-content").toggle();
+  });
+  
+  
+  $(".more-link-toggle").click(function(){
+    if($(this).hasClass("expand")) {
+      $("#partial-news").css("display","inline").css("margin-left","-5px");
+      $(this).html("Show Less");
+    }else {
+      $("#partial-news").hide();
+      $(this).html("Show All");
+    }
+    $(this).toggleClass("expand");
+      $(this).toggleClass("collapse");
+    
   });
 });
 

@@ -1,7 +1,7 @@
 <form name="create-account" action="<?php echo Kohana::$base_url."index.php/account/create"?>" method="POST">
     <div class="form-item">
         <div class="form-label required">User Name</div>
-        <input placeholder="Desired username" class="form-text required" type="text" name="username" value="<?php echo $user->username ?>" />
+        <input placeholder="Desired username" class="form-text required" type="text" name="username" value="" />
     </div>
 
     <div class="form-item">

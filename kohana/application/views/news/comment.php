@@ -3,10 +3,10 @@
   <?php $children_comments = Mango::factory("comment")->load(NULL, NULL, NULL, array(), array("comment_id" => $comment->_id)) ?>
      
     <div class="comment-item-panel">    
-      <div class="news-page-comment-item-title ">      
-      <?php echo HTML::anchor("user/details/" . $comment->user->username, $comment->user->username) ?>
+      <div class="news-page-comment-item-title">      
+      <?php echo HTML::anchor("user/details/" . $comment->user->username, $comment->user->username, array("class"=>"vote no-img")) ?>
     </div> 
-    <a  id="<?php echo $comment->url_title ?>" class="news-page-comment-title">
+    <a  id="<?php echo $comment->url_title ?>" class="news-page-comment-title no-href">
       <?php echo $comment->title ?>
       <div class="comment-list-votes">
               <?php echo count(Mango::factory("vote")->load(NULL, NULL, NULL, array(), array("type"=>1, "comment_id"=>$comment->_id))) ." Agrees " ." ".
@@ -47,10 +47,11 @@
             </ul>                                                                                                                                                                                                                                                            
           </div>                  
           <div class="comment-children">                
-    
+    <?php if(!isset($singlecomment)): ?>
         <?php foreach ($children_comments as $subcomment): ?>    
         <?php echo View::factory("news/comment", array("comment" => $subcomment, "news" => $news, "logged_user" => $logged_user)) ?>
         <?php endforeach; ?>
+         <?php endif; ?>
       </div>
     </div>
   </div>

@@ -27,6 +27,9 @@ if($original_story!=null && $original_story->loaded()){
     </div>
     <div class="form-submit">
         <input type="submit" value="Add News" />
+        <?php if(isset($subitem)): ?>
+         <input type="reset" value="Cancel" onclick="$('<?php echo $subitem?>').toggle()"/>
+        <?php endif; ?>
     </div>
 
 </form>

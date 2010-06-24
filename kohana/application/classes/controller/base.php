@@ -54,7 +54,7 @@ class Controller_Base extends Controller_Template {
                 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.2/jquery-ui.min.js',
                 'media/js/utils.js',
             );
-
+            $this->template->user = $this->logged_user;
             $this->template->styles = array_merge($this->template->styles, $styles);
             $this->template->scripts = array_merge($this->template->scripts, $scripts);
             $this->template->messages = $this->session->get("messages", array());
