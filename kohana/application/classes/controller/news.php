@@ -40,11 +40,15 @@ class Controller_news extends Controller_Base {
                 $tdy_news = newsutils::get_next_id();
                 $values["humanizeid"] = (int) (date("ymd") . $tdy_news->news_count);
 
-                $values["url_title"] = $values["humanizeid"] . "_" . Kohana_Inflector::underscore(
+                if(newsutils::is_utf8($values['title'])) {
+                  $title_parts = explode(" ", $values['title']);
+                  $values['url_title'] = $values["humanizeid"] . "_" . $title_parts[0];
+                }else {
+                  $values["url_title"] = $values["humanizeid"] . "_" . Kohana_Inflector::underscore(
                                 filter_var(preg_replace("/[^a-zA-Z0-9\\s]/", "", $values["title"]),
                                         FILTER_SANITIZE_STRING,
                                         FILTER_FLAG_STRIP_LOW | FILTER_FLAG_STRIP_HIGH | FILTER_FLAG_STRIP_BACKTICK));
-
+                }
                 $values["daystory_id"] = $tdy_news->_id . "";
                 $values['description'] = nl2br($values['description']);
                 if ($original_story != NULL) {
@@ -138,7 +142,7 @@ class Controller_news extends Controller_Base {
     public function action_view($news_title) {
         $news = Mango::factory("story")->load(1, NULL, NULL, array(), array("url_title" => $news_title));
         if ($news->loaded()) {
-          $story_comments = Mango::factory("comment")->load(NULL, NULL, NULL, array(), array("story_id"=>$news->_id));
+          $story_comments = Mango::factory("comment")->load(NULL, array("likes"=>1), NULL, array(), array("story_id"=>$news->_id));
             $this->template->content = View::factory("news/view", array("news" => $news, "logged_user"=>$this->logged_user, "story_comments"=>$story_comments));
         } else {
             //todo related or so and so...

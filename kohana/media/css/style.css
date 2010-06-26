@@ -10,28 +10,41 @@
    TODO customize this sample style
    Syntax recommendation http://www.w3.org/TR/REC-CSS2/
 */
+/*
+#669c34 => Green
+006efb => Blue
+ffaa00 => yellow
+fd3c00 => ornage
+
+*/
 h1, h2, h3, h4, h5, h6 {
   padding: 0;
   margin: 0;
   font-weight: lighter;
+  color: #669c34;
+}
+a {
+  
 }
 .site-header {
-
   background-color:#657500;
 }
 .site-content {
-
+  position: relative;
   color:#000
 }
 .left-content {
-  width: 810px;
+  width: 850px;
   float:left;
-  /*background-color: #C7DBA9;*/
-  padding:20px;
+  min-height: 700px;
+  padding:5px;
 }
 .right-content {
   width: 250px;
   float: left;
+  padding:5px;
+  background-color: #C7DBA9;
+  min-height: 700px;
 }
 .site-header-menu {
   height: 44px;
@@ -45,6 +58,7 @@ body {
 }
 a, a:visited {
   color: #888;
+  height: 16px;
 }
 a:hover {
   background-color: #E6EFC2;
@@ -91,21 +105,23 @@ ul.menu-links li a:hover, a.nav-a.clicked{
 .news-list-title a{
 
 }
+img.favicon{
+  padding-right: 5px;
+}
 .news-list-title {
   font-size: large;
   text-transform: capitalize;
 }
 .news-list-desc {
-
-  max-height: 72px;
+  max-height: 48px;
   line-height: 24px;
   overflow: hidden;
-
 }
 .news-list-others {
-  background-color: #F7F3E8;
+  background:none repeat scroll 0 0 #FFFFDD;
   margin: 10px 0;
   padding: 10px 0;
+  min-height: 15px;
 }
 .news-list-actions {
   float:right;
@@ -179,13 +195,11 @@ ul.news-page-items {
   margin-left: 90%;
 }
 .news-page-title {
-  font-size: 16pt;
-  font-weight: bold;
-  text-transform: capitalize;
+  
 
 }
 .news-page-title *{
-  font-size: large;
+ 
   display: inline;
 }
 .new-page-title-sep {
@@ -253,6 +267,10 @@ input[type=submit], input[type=reset]  {
 input[type=reset] {
   background-color: #d42727;
   color: #ffffff;
+}
+input[type=submit].mild {
+  background-color: #ccc;
+  color: 000;
 }
 .hidden {
   display: none;
@@ -356,7 +374,7 @@ a.news-page-comment-title {
   border: 1px solid #C7DBA9;
 }
 .vote.decided.agree {
-  background-color: #00aa00;
+  background-color: #669C34;
 }
 .vote.decided.disagree {
   background-color: #BD9A52;
@@ -392,8 +410,6 @@ a.news-page-comment-title {
   padding: 10px;
 }
 .home-page-latest-comment-title {
-  color: #00aa00;
-
   width: 200px;
   float:left;
 }
@@ -411,4 +427,8 @@ a.news-page-comment-title {
 }
 .item-even {
   
+}
+.reported {
+  text-decoration: line-through;
+ opacity: .3;
 }

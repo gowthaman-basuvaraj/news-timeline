@@ -2,14 +2,75 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-$(document).ready(function(){
+function modal_actions(url, type, method, data, onsuccess){
+ 
+  if(type=="link"){
+    
+  }else if(type=="form#form_id"){
+    //TODO
+  }
+  if(onsuccess == "reload"){
+    onsuccess = reload_fn;
+  }
+  $.ajax({
+    type: method,
+    url: url,
+    data : data,
+    success: onsuccess //TODO error handler    
+  });
+}
+function reload_fn(){  
+  location.reload();
+}
+function save_item(a, url){
+  modal_actions(url, "link", "GET", "", function(data){
+    $(a).after("<a class='vote no-img'>Saved</a>");
+    $(a).remove();
+  });
+}
+$(document).ready(function(){ 
+  
+  $(".modal-dialog").click(function(e){
+    var ref= $(this),
+    dialog = ref.attr("dialog"),
+    action = ref.attr("action") || window.location.href,
+    type = ref.attr("type") || "link",
+    method = ref.attr("method") || "GET",
+    data = ref.attr("data"),
+    onsuccess = ref.attr("onsuccess") || "reload";
+    
+    if(dialog){
+      e.preventDefault();
+      $("#"+dialog).dialog({
+        resizable: false,
+        height:540,
+        width: 500,
+        modal: true,
+        buttons: {
+          'Agree & proceed': function() {
+            modal_actions(action, type, method,data,  onsuccess);
+            $(this).dialog('close');
+          },
+          Cancel: function() {
+            $(this).dialog('close');
+          }
+        }
+
+      });
+      
+    }
+    else {
+      return true;
+    }
+    return false
+  })
   $(".comment-reply-link").click(function(){
     action_url = base_url+"index.php/news/comment/"+$(this).attr("news")+"/"+$(this).attr("comment");
     $(".comment-reply-form-container.comment").find("form").attr("action", action_url)
     $(this).after($(".comment-reply-form-container.comment").toggle());
   });
   $(".add-followup-link").click(function(){
-   $(".comment-reply-form-container.story").toggle()
+    $(".comment-reply-form-container.story").toggle()
   });
   
   $("a.nav-a").click(function(e){
@@ -17,8 +78,7 @@ $(document).ready(function(){
     if(elem.next(".quick-form").length==0){
       return true;
     }else {
-      $(".quick-form").hide();
-      
+      $(".quick-form").hide();      
       if(!elem.hasClass("clicked")){
         $(".clicked").removeClass("clicked");
         elem.addClass("clicked");
@@ -76,9 +136,10 @@ $(document).ready(function(){
       $(this).html("Show All");
     }
     $(this).toggleClass("expand");
-      $(this).toggleClass("collapse");
+    $(this).toggleClass("collapse");
     
-  });
+  });  
+  
 });
 
 function vote_comment(a, vote, prev_vote){
@@ -95,12 +156,16 @@ function vote_comment(a, vote, prev_vote){
       type="votechangedown";
     }
   }
+  if(vote == -1 && prev_vote == -1){
+    type = "report";
+  }
   
   cid = $(a).attr("comment");
   action_url = base_url+"index.php/vote/"+type+"/"+cid;
   $.ajax({
     url: action_url,
     success : function(data){
+      //TODO change status
       location.reload();
           
     }

@@ -70,9 +70,18 @@
                   <div class="left-content">                        
         <?php echo $content ?>
                   </div>                        
-                  <div class="right-content"> <?php if ($user && $user->is_moderator): ?>
+                  <div class="right-content"> 
+        <h2>Welcome <?php if($user) echo $user->username ?></h2>
+        <ul>
+        <?php if ($user && $user->is_moderator): ?>
                       <li><?php echo HTML::anchor("news/add", "Add News") ?></li>
         <?php endif; ?>
+        </ul>
+        <!--
+        <?php foreach($user_saved as $si):?>
+        <a href="<?php echo kohana::$base_url."index.php/news/view/$si"?>"><?php echo $si ?></a>
+        <?php endforeach; ?>
+        -->
                     </div>                            
               
                   </div>                              

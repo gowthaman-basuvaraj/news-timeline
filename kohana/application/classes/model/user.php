@@ -16,8 +16,8 @@ class Model_User extends basemodel {
     protected $_fields = array(
         'username' => array('type' => 'string', 'required' => TRUE, 'unique' => TRUE, 'min_length' => 3, "rules" => array("not_empty" => NULL), "default"=>"Guest"),
         'email' => array('type' => 'string', 'unique' => TRUE,),
-        'password' => array('type' => 'string', 'required' => TRUE, 'min_length' => 8, "rules" => array("not_empty" => NULL),  ),
-        'repassword' => array('type' => 'string', 'required' => TRUE, 'local' => TRUE, 'min_length' => 8, "rules" => array("not_empty" => NULL)),
+        'password' => array('type' => 'string', 'required' => TRUE, 'min_length' => 5, "rules" => array("not_empty" => NULL),  ),
+        'repassword' => array('type' => 'string', 'required' => TRUE, 'local' => TRUE, 'min_length' => 5, "rules" => array("not_empty" => NULL)),
         'email_verified' => array('type' => 'boolean', 'default' => FALSE),
         'display_name' => array('type' => 'string'),
         'open_ids' => array('type' => 'array'),
@@ -28,6 +28,7 @@ class Model_User extends basemodel {
         'stories' => array('type'=>'has_many'),
         'comments' => array('type'=>'has_many'),
         'links' => array('type'=>'has_many'),
+        'throwaway_account'=>array("type"=>'boolean', 'default'=>FALSE),
        
     );
     protected $_db = 'news_users';

@@ -38,5 +38,9 @@ return array(
         'hostnames' => 'localhost',
         'database' => 'news_dayitems',
         'profiling' => FALSE
+    ), 'news_user_saved_items' => array(
+        'hostnames' => 'localhost',
+        'database' => 'news_user_saved_items',
+        'profiling' => FALSE
     )
 );

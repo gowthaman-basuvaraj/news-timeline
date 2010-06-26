@@ -15,6 +15,15 @@ class Controller_Vote extends Controller_Base {
   public function action_votechangedown($comment_urltitle){
      return $this->vote($comment_urltitle, -1, false);
   }
+  public function action_report($comment_urltitle){
+    $comment = Mango::factory("comment")->load(1, NULL, NULL, array(), array("url_title"=>$comment_urltitle));
+    if(!$comment->isReportedBy()) {
+      $comment->reported->increment();
+      $comment->reported_by[] = $this->logged_user->_id."";
+      $comment->update();
+      die("ok");
+    }
+  }
   private function vote($comment_urltitle, $num, $new){
     $comment = Mango::factory("comment")->load(1, NULL, NULL, array(), array("url_title"=>$comment_urltitle));
     $vote = Mango::factory("vote")->load(1, NULL ,NULL, array(), array("user_id"=>$this->logged_user->_id, "comment_id"=>$comment->_id));

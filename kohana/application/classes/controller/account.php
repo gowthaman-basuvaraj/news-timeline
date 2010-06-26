@@ -14,9 +14,27 @@ class Controller_Account extends Controller_Base {
             $this->request->redirect("account/create");
         }
     }
-
+  
     public function action_login() {
         if (Request::$method == "POST") {
+          if(isset($_POST['tlogin_id'])){
+              $unique_tlogin = Session::instance()->get("unique_tlogin", null);
+              if($unique_tlogin != null && $unique_tlogin == $_POST['tlogin_id']){
+                //create a throwaway account and login
+                $taccount = Mango::factory("user")->values(
+                        array(
+                            "username"=>"Guest",
+                            "password"=>md5(uniqid(date("U")."", true)), //unique password
+                            'throwaway_account'=>true
+                        )
+                        )->create();
+                $this->session->set("user", $taccount);
+                $this->session->set("authorized", true);
+                die("OK");
+              }else {
+                die("ERROR");
+              }
+          }else {
             $user = Mango::factory("user")->load(1, NULL, NULL, array(), array("username" => $_POST['username'], "password" => md5($_POST['password'])));
             if ($user->loaded()) {
                 $this->session->set("user", $user);
@@ -24,6 +42,7 @@ class Controller_Account extends Controller_Base {
                 $this->request->redirect("welcome/index");
             }
             $this->add_message("Invalid Login Details", "error");
+          }
         }
         $this->template->content = View::factory("account/login");
     }
@@ -63,9 +82,11 @@ class Controller_Account extends Controller_Base {
         $user = Mango::factory("user");
         $errors = array();
         if (Request::$method == "POST") {
-            $errors = $this->accountutils->create_user($user, $_POST);
+            list($errors, $user) = $this->accountutils->create_user($user, $_POST);
             if (is_array($errors) && count($errors) == 0) {                
-                $this->request->redirect("account/login");
+                Session::instance()->set("user", $user);
+                $this->session->set("authorized", true);
+                $this->request->redirect($_SERVER['HTTP_REFERER']);
             } else {
                 $this->add_message($errors, "form-errors");
             }

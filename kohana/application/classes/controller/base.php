@@ -31,6 +31,7 @@ class Controller_Base extends Controller_Template {
 
             $this->template->styles = array();
             $this->template->scripts = array();
+             $this->template->user_saved = array();
         }
     }
 
@@ -80,6 +81,14 @@ class Controller_Base extends Controller_Template {
             $form_errors[] = $message;
              $this->session->set("form_errors", $form_errors);
         }
+    }
+    
+    protected function mongoId2Array($mong, $field="_id"){
+      $ret = array();
+      foreach($mong as $m) {
+        $ret[] = "".$m->{$field};
+      }
+      return $ret;
     }
 
 }
