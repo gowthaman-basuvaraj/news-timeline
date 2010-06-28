@@ -22,11 +22,16 @@ function modal_actions(url, type, method, data, onsuccess){
 function reload_fn(){  
   location.reload();
 }
-function save_item(a, url){
-  modal_actions(url, "link", "GET", "", function(data){
-    $(a).after("<a class='vote no-img'>Saved</a>");
-    $(a).remove();
-  });
+function save_item(a, url, loggedin){
+  if(loggedin){
+      modal_actions(url, "link", "GET", "", function(data){
+      $(a).after("<a class='vote no-img'>Saved</a>");
+      $(a).remove();
+    });
+  }else {
+    //pop login tray
+  }
+  
 }
 $(document).ready(function(){ 
   

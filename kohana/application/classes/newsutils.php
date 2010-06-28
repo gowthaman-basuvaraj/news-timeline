@@ -20,11 +20,11 @@ class newsutils {
     return $tdy_news;
   }
 
-  public static function get400Chars($str) {
+  public static function getReqChars($str, $num) {
     $len = strlen($str);
-    if ($len <= 400)
-      return 400;
-    $space_pos = stripos($str, " ", 400);
+    if ($len <= $num)
+      return $num;
+    $space_pos = stripos($str, " ", $num);
     if ($space_pos) {
       return $space_pos;
     }

@@ -21,13 +21,13 @@ h1, h2, h3, h4, h5, h6 {
   padding: 0;
   margin: 0;
   font-weight: lighter;
-  color: #669c34;
+  color: #990033;
 }
 a {
   
 }
 .site-header {
-  background-color:#657500;
+  background-color:#666633;
 }
 .site-content {
   position: relative;
@@ -113,12 +113,11 @@ img.favicon{
   text-transform: capitalize;
 }
 .news-list-desc {
-  max-height: 48px;
+  height: 24px;
   line-height: 24px;
   overflow: hidden;
 }
 .news-list-others {
-  background:none repeat scroll 0 0 #FFFFDD;
   margin: 10px 0;
   padding: 10px 0;
   min-height: 15px;
@@ -231,8 +230,7 @@ img {
 }
 .news-page-link {
   display: block;
-  height: 32px;
-
+ 
 }
 .news-page-content {
   overflow: auto;
@@ -365,12 +363,12 @@ a.news-page-comment-title {
 .vote.no-img {
   padding: 0;
   margin-right: 5px;
-  color: #657500;
+  color: #666633;
 
 }
 .vote.no-img:hover {
   color: #FFF;
-  background-color: #657500;
+  background-color: #666633;
   border: 1px solid #C7DBA9;
 }
 .vote.decided.agree {
@@ -407,7 +405,6 @@ a.news-page-comment-title {
 }
 .home-page-latest-comment {
   clear:both;
-  padding: 10px;
 }
 .home-page-latest-comment-title {
   width: 200px;
@@ -421,12 +418,20 @@ a.news-page-comment-title {
   width:185px;
   z-index: 100;
 }
-
+.quick-form input {
+  width: 100%;
+}
+.quick-news-add-form {
+  width: 400px;
+}
+.quick-form input[type=submit]{
+  width: 120px;
+}
 .item-odd {
-  
+ background-color: #F7E7BD; 
 }
 .item-even {
-  
+ background-color: #FFF; 
 }
 .reported {
   text-decoration: line-through;

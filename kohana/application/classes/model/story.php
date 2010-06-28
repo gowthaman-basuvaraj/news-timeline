@@ -27,7 +27,9 @@ class Model_Story extends basemodel {
         'url_title' => array('type' => 'string'),
         'story_depth'     => array('type'=>'int', 'default'=>1),//allow only some levels
         'story_date'    => array('type'=>'int','required'=>TRUE, "default"=>-1), //date of the story 
-        "twitter_hashtags" => array("type"=>"array"), //TODO:: 
+        "hashtags" => array("type"=>"has_many"), //TODO:: 
+        "story_image" => array("type"=>"string"),
+        "local_cache" => array("type"=>"string"),
     );
     protected $_db = "news_news";
 

@@ -22,7 +22,7 @@ class Controller_Base extends Controller_Template {
         $this->session = Session::instance();
         $this->accountutils = new accountutils();
         $this->logged_in = $this->session->get("authorized", false);
-        $this->logged_user = $this->session->get("user", null);
+        $this->logged_user = $this->session->get("user", Mango::factory("user"));
         
         if ($this->auto_render) {
             // Initialize empty values
@@ -32,6 +32,7 @@ class Controller_Base extends Controller_Template {
             $this->template->styles = array();
             $this->template->scripts = array();
              $this->template->user_saved = array();
+             $this->template->logged_user = $this->logged_user;
         }
     }
 
@@ -61,7 +62,7 @@ class Controller_Base extends Controller_Template {
             $this->template->messages = $this->session->get("messages", array());
             $this->template->form_errors = $this->session->get("form_errors", array());
             $this->session->set("messages", array());
-                      $this->session->set("form_errors", array());
+            $this->session->set("form_errors", array());
 
         }
         //todo if Ajax Header then echo $this->template->content and not the entire template
@@ -90,6 +91,8 @@ class Controller_Base extends Controller_Template {
       }
       return $ret;
     }
+    
+     
 
 }
 ?>

@@ -29,6 +29,7 @@ class Model_User extends basemodel {
         'comments' => array('type'=>'has_many'),
         'links' => array('type'=>'has_many'),
         'throwaway_account'=>array("type"=>'boolean', 'default'=>FALSE),
+        "is_loggedin"=>array("type"=>"boolean", "default"=>false),
        
     );
     protected $_db = 'news_users';

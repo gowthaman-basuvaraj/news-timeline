@@ -33,10 +33,10 @@ class Model_Comment extends basemodel {
 
     public function isReportedBy($user=null){
       if($user==null){
-        $user = Session::instance()->get("user");
+        $user = Session::instance()->get("user") ;
       }
       foreach($this->reported_by as $uid){
-        if($user->_id."" == $uid){
+        if($user && $user->_id."" == $uid){
           return true;
         }
       }

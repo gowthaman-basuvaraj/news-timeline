@@ -20,10 +20,11 @@ class Controller_news extends Controller_Base {
         }
         if (Request::$method == "POST") {
             $linkObjects = array();
+            $twtTags = array();
 
             try {
 
-                if (isset($_POST['link']) && is_array($_POST)) {
+                if (isset($_POST['link']) && is_array($_POST['link'])) {
                     foreach ($_POST['link'] as $linkHref) {
                         if (Kohana_Validate::url($linkHref)) {
                             $title_link = "";
@@ -35,6 +36,18 @@ class Controller_news extends Controller_Base {
                     }
 
                     unset($_POST['link']);
+                }
+                if(isset($_POST['hashtags'])){
+                  $tags = preg_split("/[\s,]+/", $_POST['hashtags']);
+                  foreach($tags as $tag){
+                    $tagE = Mango::factory("hashtag")->load(1, NULL, NULL, array(), array("hashtag"=>new MongoRegex("/$tag/i")));
+                    if($tagE->loaded()){
+                      $twtTags[] = array("tag"=>$tagE, "new"=>false);
+                    }else {
+                      $twtTags[] = array("tag" => $tagE->values(array("hashtag"=>$tag)) , "new"=>true);
+                    }
+                  }
+                  unset($_POST['hashtags']);
                 }
                 $values = $_POST;
                 $tdy_news = newsutils::get_next_id();
@@ -65,24 +78,24 @@ class Controller_news extends Controller_Base {
                 $values = $news->check($values);
                 $news->values($values);
                 $news->create();
-                $readability = new Readability();
                 $fetcher = new Contentfetcher();
                 foreach ($linkObjects as $linkObject) {
 
                     $news->add($linkObject);
                     $linkObject->values(array("story_id" => $news->_id, "user_id" => $this->logged_user->_id . ""));
                     $linkObject->update();
-                    //TODO move it to gearman client
+                    //TODO move it to gearman client, to extract tweets too
                     //todo make url parsing, to default readable content
                     //such as
                     //single page
                     //print view etc...
                     //also get favicon
 
-                    $content_div = $readability->grabArticle($fetcher->get_htmlpage($linkObject->url));
-                    $favicon = $this->GetMainBaseFromURL($linkObject->url);
-                    $content_html = $content_div->ownerDocument->saveXML($content_div);
-                    $linkObject->values(array("readable_text" => $content_html, "favicon"=>$favicon."favicon.ico"));
+                    //;
+                    
+                    $favicon = $fetcher->GetMainBaseFromURL($linkObject->url);
+                    
+                    $linkObject->values(array( "favicon"=>$favicon."favicon.ico"));
 
                     $this->logged_user->add($linkObject);
                     $this->logged_user->update();
@@ -90,8 +103,20 @@ class Controller_news extends Controller_Base {
                 $news->update();
                 $tdy_news->add($news);
                 $tdy_news->update();
+                
                 $this->logged_user->add($news);
                 $this->logged_user->update();
+                foreach($twtTags as $tags){
+                  $tags["tag"]->values(array("stories"=>array($news->_id) ));
+                   
+                  if($tags["new"]) {
+                    $tags["tag"]->create();                   
+                  }else {
+                     $tags["tag"]->update();                   
+                  }
+                  $news->add($tags["tag"]);
+                }
+                $news->update();
                 if ($original_story != NULL) {
                     $original_story->add($news);
                     $original_story->update();
@@ -116,28 +141,7 @@ class Controller_news extends Controller_Base {
         $this->template->content = View::factory("news/add", array("news" => $news, "original_story" => $original_story));
     }
 
-    function GetMainBaseFromURL($url) {
-        $chars = preg_split('//', $url, -1, PREG_SPLIT_NO_EMPTY);
-
-        $slash = 3; // 3rd slash
-
-        $i = 0;
-
-        foreach ($chars as $key => $char) {
-            if ($char == '/') {
-                $j = $i++;
-            }
-
-            if ($i == 3) {
-                $pos = $key;
-                break;
-            }
-        }
-
-        $main_base = substr($url, 0, $pos);
-
-        return $main_base . '/';
-    }
+   
 
     public function action_view($news_title) {
         $news = Mango::factory("story")->load(1, NULL, NULL, array(), array("url_title" => $news_title));
@@ -153,7 +157,7 @@ class Controller_news extends Controller_Base {
       $comment = Mango::factory("comment")->load(1, NULL, NULL, array(),array("url_title"=>$original_comment_title));
       if($comment->loaded()){
         $comment->values(array("title"=>"[deleted]", "comment_body"=>"", "user_id"=>new MongoId(), 'deleted'=>TRUE))->update();
-        die(Kohana::debug($comment->as_array()));
+        die("OK");
       }
       die("OK NOT");
       
@@ -212,6 +216,7 @@ class Controller_news extends Controller_Base {
                 $values = $comment->check($values);
                 $comment->values($values);
                 $comment->create();
+
                 foreach ($linkObjects as $linkObject) {
                     $news->add($linkObject);
                     $linkObject->values(array("story_id" => $original_story->_id . "", "comment_id" => $comment->_id . "", "user_id" => $this->logged_user->_id . ""));
