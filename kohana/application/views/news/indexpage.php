@@ -9,8 +9,9 @@
       <?php $link = $news->links[0]; ?>
       <a href="<?php echo $link->url ?>"><img src="<?php echo $link->favicon ?>" class="favicon" alt=""/><?php echo $news->title ?></a>
     </h2>
+      <?php echo HTML::anchor("news/view/$news->url_title?ref=hi", "<img src='$news->story_image' onerror='$news->local_cache' class='home-page-image'/>") ?>
     <div class="news-list-desc">
-      <?php echo $news->description ?>
+      <?php echo substr($news->description, 0, newsutils::getReqChars($news->description, 100)); ?>
 
     </div>
     <div class="news-list-others">
@@ -21,18 +22,23 @@
         <?php endif; ?>
         </h3>        
         <div class="news-list-actions">
-          <?php if(in_array($news->url_title, $user_saved)): ?>
+          <?php if(isset($user_saved) && in_array($news->url_title, $user_saved)): ?>
           <div class="vote no-img" style="display:inline">Saved</div>
-          <?php else: ?>
-          <a href="javascript:void(0)" class="vote no-img" onclick="save_item(this, '<?php echo htmlentities(Kohana::$base_url."index.php/user/saveitem/$news->_id");?>')">Save It!</a>
+          <?php elseif(!$user->is_loggedin): ?>
+          <a href="javascript:void(0)" class="vote no-img" onclick="save_item(this, '<?php echo htmlentities(Kohana::$base_url."index.php/user/saveitem/$news->_id");?>', false)">Save It!</a>
+          <?php elseif($user->is_loggedin): ?>
+          <a href="javascript:void(0)" class="vote no-img" onclick="save_item(this, '<?php echo htmlentities(Kohana::$base_url."index.php/user/saveitem/$news->_id");?>', true)">Save It!</a>
           <?php endif; ?>
+          
           <a href="#" class="vote no-img">Share It!</a>
-        <?php echo HTML::anchor("news/view/$news->url_title", count($comments) . " Comment(s) /".count(Mango::factory("story")->load(NULL, NULL, NULL, array(), array("story_id" => $news->_id))) . " Followup(s)", array("class" => "vote no-img")) ?>
+          
+        <?php echo HTML::anchor("news/view/$news->url_title?ref=cf", count($comments) . " Comment(s) /".count(Mango::factory("story")->load(NULL, NULL, NULL, array(), array("story_id" => $news->_id))) . " Followup(s)", array("class" => "vote no-img")) ?>
         <?php $latest_comment = Mango::factory("comment")->load(1, array("humanizeid" => -1), NULL, array(), array("story_id" => $news->_id)); ?>
         </div>                 
       <?php if ($latest_comment->loaded()) : ?>      
             <div class="home-page-latest-comment">      
-        <?php echo substr($latest_comment->comment_body,0, 150); ?>
+              <?php echo substr($latest_comment->comment_body, 0, newsutils::getReqChars($latest_comment->comment_body, 100)); ?>
+        
           </div>                
       <?php endif; ?>
           </div>                        

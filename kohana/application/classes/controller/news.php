@@ -118,8 +118,8 @@ class Controller_news extends Controller_Base {
                 }
                 $news->update();
                 if ($original_story != NULL) {
-                    $original_story->add($news);
-                    $original_story->update();
+                    //$original_story->add($news);
+                    //$original_story->update();
                     $this->request->redirect("news/view/$original_story->url_title#$news->url_title");
                 } else {
                     $this->request->redirect("news/view/$news->url_title");
@@ -147,7 +147,8 @@ class Controller_news extends Controller_Base {
         $news = Mango::factory("story")->load(1, NULL, NULL, array(), array("url_title" => $news_title));
         if ($news->loaded()) {
           $story_comments = Mango::factory("comment")->load(NULL, array("likes"=>1), NULL, array(), array("story_id"=>$news->_id));
-            $this->template->content = View::factory("news/view", array("news" => $news, "logged_user"=>$this->logged_user, "story_comments"=>$story_comments));
+          $followups = Mango::factory("story")->load(NULL, NULL, NULL, array(), array("story_id"=>$news->_id));
+            $this->template->content = View::factory("news/view", array("news" => $news, "logged_user"=>$this->logged_user, "story_comments"=>$story_comments, "followups"=>$followups));
         } else {
             //todo related or so and so...
         }

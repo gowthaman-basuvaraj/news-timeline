@@ -56,6 +56,8 @@ class Controller_Gearman extends Controller_Base {
   }
 
   public function action_process_link($job) {
+    $req_min_hight = 100;
+    $req_min_width = 100;
     foreach (Mango::factory("link")->load(null) as $link) {
       $workload['link'] = $link;
       //$workload = $job->workload();
@@ -88,7 +90,7 @@ class Controller_Gearman extends Controller_Base {
           $img_url = preg_replace("/\s/", "%20", $img_url);
           $curlobj = new curlobj($img_url, $linkObject->url);
           $curlobj->createCurl();
-         // echo "Saving $filename for $img_url<br/>";
+          
           $f = fopen($filename, "wb");
           fwrite($f, $curlobj->getContent());
           fclose($f);
@@ -105,15 +107,15 @@ class Controller_Gearman extends Controller_Base {
           }
           if (!strstr(mime_content_type($file["file"]), "image"))
             continue;
-          if(strstr($file["file"], ".gif")) {//for now ignore gifs
-            continue;
-          }
+         
           $img = Kohana_Image::factory($file["file"]);
-          //echo "processing " . $file["file"] . " width $img->width<br />";
+          
+          if($img->width < $req_min_width || $img->height < $req_min_hight) continue;
+          
           if ($img->width > $max_width) {
             $max_width = $img->width;
             if (file_exists($max_width_img["file"])) {
-              unlink($max_width_img["file"]);
+              //unlink($max_width_img["file"]);
             }
             $max_width_img = $file;
           } else {
@@ -127,7 +129,7 @@ class Controller_Gearman extends Controller_Base {
           rename($max_width_img["file"], $local_cache);
           $linkObject->story->values(array("story_image" => $max_width_img["url"], "local_cache"=>$local_cache));
           $linkObject->story->update();
-          echo Kohana::debug($linkObject->story->as_array());
+         
         }
       }
 

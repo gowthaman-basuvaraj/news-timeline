@@ -77,6 +77,7 @@ Kohana::modules(array(
 	// 'pagination' => MODPATH.'pagination', // Paging of results
 	// 'userguide'  => MODPATH.'userguide',  // User guide and API documentation
             'MangoDB'   => MODPATH.'MangoDB',    // Mongo Wrapper
+    'image' => MODPATH.'image', //image module
 	));
 
 /**

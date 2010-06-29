@@ -21,12 +21,11 @@
           </div>            
           <div class="news-page-comment-item-action">                                                                                                                                                                                                                                                      
             <ul> 
-              <li><a class="vote no-img"><?php echo $comment->likes ?> Likes</a></li>
-              <li><a class="vote no-img"><?php echo $comment->dislikes ?> Dislikes</a></li>
-              <?php if ($logged_user !== null && $comment->user_id . "" == $logged_user->_id . ""): ?>
+              
+              <?php if ($logged_user->is_loggedin && $comment->user_id . "" == $logged_user->_id . ""): ?>
                 <li><a class="comment-delete-link vote no-img" href="javascript:void(0)" comment="<?php echo $comment->url_title ?>" news="<?php echo $comment->story->url_title ?>">Delete</a></li>
               <?php endif; ?>
-              <?php if (!$comment->deleted && $logged_user != null): ?>
+              <?php if (!$comment->deleted && $logged_user->is_loggedin): ?>
                   <!-- User liked or disliked this post .. or no action was performed, -->                    
               <?php $user_has_voted = Mango::factory("vote")->load(1, NULL, NULL, array(), array("user_id" => $logged_user->_id, "comment_id" => $comment->_id)); ?>
     

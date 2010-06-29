@@ -105,6 +105,21 @@ ul.menu-links li a:hover, a.nav-a.clicked{
 .news-list-title a{
 
 }
+img.news-image {
+  float:left;
+  max-width: 300px;
+  padding:10px;
+}
+img.followup-image {
+  float:left;
+  max-width: 200px;
+  padding:10px;
+}
+img.home-page-image {
+  max-width: 100px;
+  float: left;
+  padding:5px;
+}
 img.favicon{
   padding-right: 5px;
 }

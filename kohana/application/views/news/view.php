@@ -16,9 +16,10 @@
     <?php endif; ?>
       </h3>                                
       Posted on <?php echo date("d/m/Y", $news->story_date) ?> by <?php echo HTML::anchor("user/" . $news->user->username, $news->user->username) ?>
-      <div class="news-page-content">                                                                                                        
+      <div class="news-page-content">    
+        <img class="news-image" src="<?php echo $news->story_image?>" onerror="<?php echo $news->local_cache?>" />
         <div class="news-page-desc">                                                                                                                                                                                                
-    <?php $pos = newsutils::get400Chars($news->description); ?>
+    <?php $pos = newsutils::getReqChars($news->description, 400); ?>
       <?php echo substr($news->description, 0, $pos); ?>
       <?php if (strlen($news->description) > 400): ?> 
           <div style="display:none" id="partial-news">                        
@@ -55,13 +56,15 @@
           </div>                                                                                                                                                                                                        
           <div class="clear-line"></div>                                                                                                                                                                                                                                                                                                                                                        
           <div class="news-followup-items">                                                                                                                                                                                                                                                                                                                                                        
-    <?php foreach ($news->stories as $item) : ?>
+    <?php foreach ($followups as $item) : ?>
                 <div class="news-followup-item-container <?php echo Kohana_Text::alternate("followup-item-odd", "followup-item-even") ?>">                    
                   <div class="news-page-followupitem">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
                     <h3 title="<?php echo $item->url_title ?>"><?php echo $item->title ?></h3>
                     <div class="news-page-followupitem-content">                                                                           
                       Posted on <?php echo date("d/m/Y", $item->story_date) ?> by <?php echo HTML::anchor("user/" . $item->user->username, $item->user->username) ?>
-                      <div class="news-page-desc followup-item">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+                      <div class="news-page-desc followup-item"> 
+                     
+                        <img class="followup-image" src="<?php echo $item->story_image?>" onerror="<?php echo $item->local_cache?>" />
             <?php echo substr($item->description, 0, 400); ?> <?php echo HTML::anchor("news/view/$item->url_title", "More .. ", array("class" => "vote no-img")) ?>
               </div>                                                                                                                                            
     

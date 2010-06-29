@@ -21,7 +21,7 @@ class Model_Story extends basemodel {
         'updated' => array('type' => 'int'),
         'items_count' => array('type' => 'counter'),
         'categories' => array('type' => 'set'),
-        'stories' => array('type' => 'has_many'),
+       
         'links' => array('type' => 'has_many'),
         'humanizeid' => array('type' => 'int'),
         'url_title' => array('type' => 'string'),

@@ -42,5 +42,13 @@ return array(
         'hostnames' => 'localhost',
         'database' => 'news_user_saved_items',
         'profiling' => FALSE
+    ), 'news_hashtags' => array(
+        'hostnames' => 'localhost',
+        'database' => 'news_hashtags',
+        'profiling' => FALSE
+    ), 'news_tweets' => array(
+        'hostnames' => 'localhost',
+        'database' => 'news_tweets',
+        'profiling' => FALSE
     )
 );

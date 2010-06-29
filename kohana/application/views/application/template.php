@@ -26,7 +26,7 @@
           <div class="site-header-menu">                        
             <ul class="menu-links">                        
               <li><?php echo HTML::anchor("welcome/index", "Home", array("class"=>"nav-a")); ?></li>
-          <?php if (Session::instance()->get("user", null) == null) : ?>
+          <?php if (!$logged_user->is_loggedin) : ?>
             <li>
                 <?php echo HTML::anchor("account/login", "Login", array("class"=>"nav-a")); ?>
                <div class="comment-reply-form-container quick-account-create-form hidden quick-form"> 
@@ -41,7 +41,16 @@
             </div>  
             </li>
             
-          <?php else: ?>                            
+            
+          <?php else: ?>     
+            <?php if($logged_user->is_moderator): ?>
+             <li>
+              <?php echo HTML::anchor("news/add", "Add News", array("class"=>"nav-a")); ?>
+              <div class="comment-reply-form-container quick-news-add-form hidden quick-form">  
+              <?php echo View::factory("news/add");?> 
+            </div>  
+            </li>
+            <?php endif; ?>
               <li>
                   <?php echo HTML::anchor("account/logout", "Logout"); ?>
                  
@@ -67,7 +76,10 @@
             
             
                 <div class="site-content">                        
-                  <div class="left-content">                        
+                  <div class="left-content"> 
+                    <div>
+                      
+                    </div>
         <?php echo $content ?>
                   </div>                        
                   <div class="right-content"> 

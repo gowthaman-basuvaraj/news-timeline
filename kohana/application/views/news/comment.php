@@ -21,10 +21,10 @@
       </div>            
       <div class="news-page-comment-item-action <?php echo $reported ?>">                                                                                                                                                                                                                                                      
         <ul>  
-          <?php if ($logged_user !== null && $comment->user_id . "" == $logged_user->_id . ""): ?>
+          <?php if ($logged_user->is_loggedin && $comment->user_id . "" == $logged_user->_id . ""): ?>
             <li><a class="comment-delete-link vote no-img" href="javascript:void(0)" comment="<?php echo $comment->url_title ?>" news="<?php echo $news->url_title ?>">Delete</a></li>
           <?php endif; ?>
-          <?php if (!$comment->deleted && $logged_user != null): ?>
+          <?php if (!$comment->deleted && $logged_user->is_loggedin): ?>
               <li><a class="comment-reply-link vote no-img" href="javascript:void(0)" comment="<?php echo $comment->url_title ?>" news="<?php echo $news->url_title ?>">Reply</a></li>
               <!-- User liked or disliked this post .. or no action was performed, -->    
           <?php $user_has_voted = Mango::factory("vote")->load(1, NULL, NULL, array(), array("user_id" => $logged_user->_id, "comment_id" => $comment->_id)); ?>
@@ -44,7 +44,7 @@
           <?php endif; ?>
           <?php endif; ?>
           <?php endif; ?>
-                      <?php if($reported == "") : ?>
+                      <?php if($reported == "" && $logged_user->is_loggedin) : ?>
                       <li><li><a class="vote no-img  not-decided report" href="javascript:void(0)" comment="<?php echo $comment->url_title ?>" onclick="vote_comment(this, -1, -1);return false">Report SPAM/Offensive</a></li>
                       <?php endif; ?>
                     </ul>                                                                                                                                                                                                                                                                        
