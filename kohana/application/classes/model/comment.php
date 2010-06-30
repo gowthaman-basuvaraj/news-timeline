@@ -29,6 +29,7 @@ class Model_Comment extends basemodel {
         "reported"          =>array('type'=>'counter'),
         "reported_by"       =>array("type"=>"array"), //user_id of reported, we'll hide the comment 
         //to the reported user, even before we actually delete them
+        "username"          =>array("type"=>"string"), //lets hold one copy of it
     );
 
     public function isReportedBy($user=null){

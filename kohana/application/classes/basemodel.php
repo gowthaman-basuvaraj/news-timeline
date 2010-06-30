@@ -3,9 +3,6 @@
 abstract class basemodel extends Mango {
 
     public function create() {
-        
-       
-        
         return parent::create();
     }
     public function  check(array $data = NULL, $subject = 0) {

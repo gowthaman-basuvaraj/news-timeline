@@ -23,9 +23,10 @@ class Controller_Account extends Controller_Base {
           //create a throwaway account and login
           $taccount = Mango::factory("user")->values(
                           array(
-                              "username" => "Guest",
+                              "username" => "Guest ". rand(1000, 9000),
                               "password" => md5(uniqid(date("U") . "", true)), //unique password
-                              'throwaway_account' => true
+                              'throwaway_account' => true,
+                              'is_loggedin' => true
                           )
                   )->create();
           $this->session->set("user", $taccount);

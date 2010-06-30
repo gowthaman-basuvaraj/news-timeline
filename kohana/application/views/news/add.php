@@ -31,9 +31,9 @@ if(isset($original_story) && $original_story->loaded()){
         <input  placeholder="Twitter Hashtags" class="form-text" type="text" name="hashtags"  />
     </div>
     <div class="form-submit">
-        <input type="submit" value="Add News" />
+        <input type="submit" value="Add News" class="submit_button" />
         <?php if(isset($subitem)): ?>
-         <input type="reset" value="Cancel" onclick="$('<?php echo $subitem?>').toggle()"/>
+         <input type="reset" value="Cancel" class="reset_button" onclick="$('<?php echo $subitem?>').toggle()"/>
         <?php endif; ?>
     </div>
 

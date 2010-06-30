@@ -54,6 +54,40 @@ class newsutils {
     }
   }
 
+  public static function get_urltitle($link) {
+    if (newsutils::is_utf8($link->title))
+      return $link->title;
+    else
+      return htmlentities($link->title);
+  }
+
+  public static function get_newstitle($news) {
+    if ($news->story->_id . "" == "") :
+      return $news->title;
+    else:
+      $news_sel = $news;
+      $html_str = "";
+      while ($news_sel->story->_id . "" != "") {
+        $html_str = HTML::anchor("news/view/" . $news_sel->story->url_title, $news_sel->story->title) . "<div class='new-page-title-sep'>></div>" . $html_str;
+        $news_sel = $news_sel->story;
+      }
+      return $html_str . $news->title;
+    endif;
+  }
+
+  public static function get_partialnews($news) {
+    $pos = newsutils::getReqChars($news->description, 600);
+    $htm = substr($news->description, 0, $pos);
+    if (strlen($news->description) > 600) {
+      $sub = substr($news->description, $pos);
+      $htm .= <<<HTML
+      <div style="display:none" id="partial-news">$sub</div>              
+      <a href="javascript:void(0)" class="more-link-toggle expand  vote no-img"> Show All</a>              
+HTML;
+    }
+    return $htm;
+  }
+
 }
 
 ?>

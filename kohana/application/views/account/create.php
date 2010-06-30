@@ -18,7 +18,7 @@
         <input  placeholder="EMail" class="form-text" type="email" name="email"  />
     </div>
     <div class="form-submit">
-        <input type="submit" value="Create Account" />
+        <input type="submit" value="Create Account" class="submit_button"/>
     </div>
     
 </form>

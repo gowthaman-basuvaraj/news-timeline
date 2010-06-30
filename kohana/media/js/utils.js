@@ -30,6 +30,7 @@ function save_item(a, url, loggedin){
     });
   }else {
     //pop login tray
+    $("a.login-link").click();
   }
   
 }

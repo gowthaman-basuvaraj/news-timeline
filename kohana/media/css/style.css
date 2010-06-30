@@ -1,454 +1,72 @@
-/* 
-    Document   : style
-    Created on : 17 Jun, 2010, 11:05:30 PM
-    Author     : techie2go
-    Description:
-        Purpose of the stylesheet follows.
-*/
-
-/* 
-   TODO customize this sample style
-   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
-*/
-/*
-#669c34 => Green
-006efb => Blue
-ffaa00 => yellow
-fd3c00 => ornage
-
-*/
-h1, h2, h3, h4, h5, h6 {
-  padding: 0;
-  margin: 0;
-  font-weight: lighter;
-  color: #990033;
-}
-a {
-  
-}
-.site-header {
-  background-color:#666633;
-}
-.site-content {
-  position: relative;
-  color:#000
-}
-.left-content {
-  width: 850px;
-  float:left;
-  min-height: 700px;
-  padding:5px;
-}
-.right-content {
-  width: 250px;
-  float: left;
-  padding:5px;
-  background-color: #C7DBA9;
-  min-height: 700px;
-}
-.site-header-menu {
-  height: 44px;
-  margin: 10px 0px;
-}
-body { 
-  width: 1124px;
-  margin: auto;
-  font-size: 12pt;
-
-}
-a, a:visited {
-  color: #888;
-  height: 16px;
-}
-a:hover {
-  background-color: #E6EFC2;
-  color: #000;
-}
-a.no-href {
-  color: #000;
-}
-ul.menu-links {
-  padding-left: 0px;
-  float: right;
-}
-ul.menu-links li {
-  display: inline;
-  position: relative;
-}
-ul.menu-links li a{
-  font-size: large;
-  padding: 1px 5px;
-  margin: 1px 5px;
-  color: #888;
-  background-color: #FFF;
-  text-decoration: none;
-}
-ul.menu-links li a:hover, a.nav-a.clicked{
-  background-color: #E6EFC2;
-  color: #000;
-}
-.news-list-container {
-
-  overflow: auto;
-}
-.news-list-item {
-  display:block;
-
-  /*border: 1px solid #0D3257;
-  -moz-border-radius: 9px;*/
-  overflow: auto;
-
-  margin: 5px;
-  padding: 5px;
-  color: #0d3257
-}
-.news-list-title a{
-
-}
-img.news-image {
-  float:left;
-  max-width: 300px;
-  padding:10px;
-}
-img.followup-image {
-  float:left;
-  max-width: 200px;
-  padding:10px;
-}
-img.home-page-image {
-  max-width: 100px;
-  float: left;
-  padding:5px;
-}
-img.favicon{
-  padding-right: 5px;
-}
-.news-list-title {
-  font-size: large;
-  text-transform: capitalize;
-}
-.news-list-desc {
-  height: 24px;
-  line-height: 24px;
-  overflow: hidden;
-}
-.news-list-others {
-  margin: 10px 0;
-  padding: 10px 0;
-  min-height: 15px;
-}
-.news-list-actions {
-  float:right;
-}
-ul {
-  list-style: none;
-
-}
-.news-page-desc {
-  margin: 12px;
-  text-align:justify;
-}
-ul.news-page-items {
-  float: right;
-}
-.clear-line {
-  clear:both;   
-}
-
-.news-followup-items {
-  margin: 0px 0px 0px 25px;
-}
-.news-page-container {
-
-  margin:auto;
-  -moz-border-radius:7px;
-  -webkit-border-radius:7px;
-
-  padding: 20px;
-  border:1px solid #bbbcbf;
-
-
-  background-color:#ffffff;
-}
-.news-page-followupitem {
-  padding: 12px;
-}
-
-.news-followup-item-container, .news-page-comment-item  {
-  -moz-border-radius:7px;
-  -webkit-border-radius:7px;
-  margin-left:10px;
-  margin-right:31px;
-  margin-top:0px;
-  margin-bottom:8px;
-
-
-  border:1px solid #bbbcbf;
-  padding-left:5px;
-  padding-top:5px;
-  padding-right:8px;
-  padding-bottom:0px;
-
-  background-color:#ffffff;
-}
-.news-page-comment-item {
-  margin: 15px;
-  display:block;
-  clear:both;
-}
-.followup-item-odd {
-  background-color:#F7F7F8;
-
-}
-.followup-item-even {
-  background-color:#ffffff;
-
-
-}
-.news-page-followup-list-actions {
-  margin-left: 90%;
-}
-.news-page-title {
-  
-
-}
-.news-page-title *{
- 
-  display: inline;
-}
-.new-page-title-sep {
-  margin: 0px 5px;
-}
-.news-page-comments-postedby {
-  display: inline;
-  font-style: italic;
-  font-size: small;
-}
-textarea {
-  width: 400px;
-  height: 100px;
-}
-.comment-reply-form-container  input.long-text {
-  width: 400px;
-}
-img {
-  border :0 none;
-}
-.news-page-original-url {
-  width: 230px;
-}
-
-
-.news-page-links-container {
-
-  margin: 12px;
-}
-.news-page-link {
-  display: block;
- 
-}
-.news-page-content {
-  overflow: auto;
-}
-.news-title-link {
-  background-repeat: no-repeat;
-  padding: 0px 20px;
-}
-.news-page-comments-title {
-  font-size: large;
-}
-.comment-form-container {
-  -moz-border-radius:5px 5px 5px 5px;
-  -webkit-border-radius:5px 5px 5px 5px;
-  border-radius:5px 5px 5px 5px;
-  border:1px solid #CCCCCC;
-  margin:10px;
-  padding:10px;
-  width:930px;
-}
-input[type=submit], input[type=reset]  {
-  border: 0;
-  -moz-border-radius: 1px 1px 1px 1px;
-  background-color: #444;
-  color: #fff;
-  -moz-box-shadow: 1px 1px 2px rgba(0,0,0,.5);
-  cursor:pointer;
-  display:inline;
-  margin:5px;
-  padding:5px;
-}
-input[type=reset] {
-  background-color: #d42727;
-  color: #ffffff;
-}
-input[type=submit].mild {
-  background-color: #ccc;
-  color: 000;
-}
 .hidden {
   display: none;
 }
-.comment-reply-form-container, .comment-form-container {
-  background-color:#E6EFC2;
-  margin:10px;
-  padding:10px;
-  width:425px;
-}
-a.news-page-comment-title {
-  font-weight: bold;
-  margin-left: 10px;
-}
-.news-page-comment-item-title  {
-  line-height: 24px;
-  float:left;
-}
-.news-page-comment-item-desc {
-  margin: 5px;
-}
-
-.news-page-full-story-overlay {
-  position: absolute;
-  top: 0;
-  left:0;
-  width: 1400px;
-  height: 2000px;
-  z-index: 1000;
-  overflow: visible;
-  background-color: #fff; 
-}
-.news-page-full-story {
-  position: absolute;
-  top: 50px;
-  left:100px;
-  width: 700px;
-  height: 900px;
-  z-index: 2000;
-
-}
-.news-page-full-story-controls {
-  margin:50px;
-  position:absolute;
-  left:800px;
-}
-.story-control {
-  height: 200px;
-  width: 200px;
-  background-color: #fff;
-  background-repeat: no-repeat;
-  cursor: pointer;
-}
-.story-control img {
-  height: 180px;
-  max-width: 180px;
-}
-
-.container-title {
-  font-weight: bold;
-  margin: 0 0 10px 0;
-}
-.news-page-comment-item-action ul{
-  margin: 0;
-  padding: 0;
-}
-.news-page-comment-item-action ul li {
+.menu-links, .comment-action {
   display: inline;
 }
-.vote-panel {
-  width: 25px;
-  float: left;
+.home-page-image {
+  max-width: 150px;
 }
-.collapsed .vote-panel {
-  display:none;
+.news-page-image{
+  max-width: 190px;
 }
-.collapsed news-page-comment-title {
-  display: none;
+.news-page-followup-image{
+  max-width: 120px;
 }
-.comment-item-panel {
-
-}
-.vote {
-  /*padding: 0 0 0 25px;*/
-  background-repeat: no-repeat;
-  background-position:  -2px -2px;
-  color: #444;
-
-  -moz-border-radius: 2px;
-  line-height: 16px;
-}
-.vote.no-img {
-  padding: 0;
-  margin-right: 5px;
-  color: #666633;
-
-}
-.vote.no-img:hover {
-  color: #FFF;
-  background-color: #666633;
-  border: 1px solid #C7DBA9;
-}
-.vote.decided.agree {
-  background-color: #669C34;
-}
-.vote.decided.disagree {
-  background-color: #BD9A52;
-}
-.vote.decided {
-  color: #fff;
-}
-.vote.agree {
-  /*background-image: url("../icons/yes.png");*/
-
-}
-.vote.disagree{
-  /*background-image: url("../icons/no.png");*/
-}
-.comment-toggle {
-  font-size: small;
-  margin-left: 10px;
-}
-.comment-item-content {
-
-}
-.comment-list-votes {
-  display:inline;
-  font-size:small;
-  font-weight:lighter;
-}
-.news-page-comment-item-action {
-  line-height: 32px;
-  vertical-align: middle;
-}
-.home-page-latest-comment {
-  clear:both;
-}
-.home-page-latest-comment-title {
-  width: 200px;
-  float:left;
-}
-
 .quick-form {
-  position:absolute;
-  right:0;
-  top:10px;
-  width:185px;
-  z-index: 100;
+  background-color: #ccc;
+  position: absolute;
+  z-index: 999;
+  padding:10px;
 }
-.quick-form input {
-  width: 100%;
+.quick-form textarea {
+  width: 200px;
+  height: 150px;
 }
-.quick-news-add-form {
-  width: 400px;
+
+.submit_button, .reset_button{
+  border:0;
+  background-color: green;
+  color:#fff;
+  -moz-border-radius: 1px;
+  -moz-box-shadow: 1px 1px 1px rgba(0,0,0,.5);
+  padding: 5px;
+  cursor: pointer;
 }
-.quick-form input[type=submit]{
-  width: 120px;
+.submit_button.unimpressive {
+  background-color: #808080;
+  color: #AAAAAA;
+}
+.large_button {
+  font-size: large;
+}
+.reset_button {
+  background-color: red;
+}
+.news-list-item {
+  margin-bottom: 10px;
+  -moz-border-radius: 5px;
 }
 .item-odd {
- background-color: #F7E7BD; 
+  background-color: #f0f0f0;
 }
 .item-even {
- background-color: #FFF; 
+  background-color: #f7f7f7;
 }
-.reported {
+.news-list-actions {
+  padding: 10px 0;
+}
+.news-list-desc {
+  font-style: italic;
+}
+a.vote , a.vote:visited {
+  color : #000;
+}
+a.vote:hover {
+  background-color: #000;
+  color: #fff;
+}
+.reported, .reported a{
   text-decoration: line-through;
- opacity: .3;
+  color: #eeeeee;
 }

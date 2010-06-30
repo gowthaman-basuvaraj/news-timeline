@@ -45,8 +45,12 @@ class Controller_Base extends Controller_Template {
     public function after() {
         if ($this->auto_render) {
             $styles = array(
-                'media/css/screen.css' => 'screen, projection',
-                'media/css/print.css' => 'print',
+                'media/blueprint/blueprint/src/forms.css' => 'screen, projection',
+                'media/blueprint/blueprint/src/grid.css' => 'screen, projection',
+                //'media/blueprint/blueprint/src/ie.css' => 'screen, projection',
+                'media/blueprint/blueprint/src/reset.css' => 'screen, projection',
+                'media/blueprint/blueprint/src/typography.css' => 'screen, projection',
+                'media/blueprint/blueprint/src/print.css' => 'print',
                 'media/css/style.css' => 'screen',
                 'media/external/jqui_smoothness/jquery-ui-1.8.2.custom.css' => 'screen',
             );

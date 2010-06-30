@@ -20,8 +20,7 @@ class Model_Story extends basemodel {
         'created' => array('type' => 'int'),
         'updated' => array('type' => 'int'),
         'items_count' => array('type' => 'counter'),
-        'categories' => array('type' => 'set'),
-       
+        'categories' => array('type' => 'set'),       
         'links' => array('type' => 'has_many'),
         'humanizeid' => array('type' => 'int'),
         'url_title' => array('type' => 'string'),
@@ -30,6 +29,10 @@ class Model_Story extends basemodel {
         "hashtags" => array("type"=>"has_many"), //TODO:: 
         "story_image" => array("type"=>"string"),
         "local_cache" => array("type"=>"string"),
+        
+        "comments_count"  => array("type"=>"counter"),
+         "followups_count"  => array("type"=>"counter"),
+         "username"          =>array("type"=>"string"), //lets hold one copy of it
     );
     protected $_db = "news_news";
 
