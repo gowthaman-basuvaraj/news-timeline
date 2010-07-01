@@ -27,24 +27,7 @@
 
       </div>
       <div class="news-list-others span-12 last">
-        <!-- no latest comment
-        <div class="span-12 last">
-        <? if (count($news->comments_count) > 0) : ?>
-              <div class="span-2 ">      
-                &nbsp;             
-              </div>                
-        <? $latest_comment = Mango::factory("comment")->load(1, array("humanizeid" => -1), NULL, array(), array("story_id" => $news->_id)); ?>
-      
-              <div class="span-10 last ">          
-        <? if ($latest_comment->loaded()) : ?>      
-                  <div class="home-page-latest-comment">                                                                                
-        <?= substr($latest_comment->comment_body, 0, newsutils::getReqChars($latest_comment->comment_body, 100)); ?>
-                </div>                                                                  
-        <? endif; ?>
-                </div>                    
-        <? endif; ?>     
-                </div>       
-            -->    
+       
             <div class="news-list-actions span-12 last">                                  
           <? if (isset($user_saved) && in_array($news->url_title, $user_saved)): ?>
               <div class="vote no-img" style="display:inline">Saved</div>                                                              
