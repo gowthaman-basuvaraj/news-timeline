@@ -30,6 +30,7 @@ class Model_Story extends basemodel {
         "story_image" => array("type"=>"string"),
         "local_cache" => array("type"=>"string"),
         
+        'section_name'   => array('type'=>'string' ,'default'=>'general'),
         "comments_count"  => array("type"=>"counter"),
          "followups_count"  => array("type"=>"counter"),
          "username"          =>array("type"=>"string"), //lets hold one copy of it

@@ -1,5 +1,11 @@
 <ul>                                                                                                                
   <li class="menu-links"><?php echo HTML::anchor("", "Home", array("class" => "nav-a")); ?></li>
+  <? if($logged_user->is_moderator): ?>
+    <li class="menu-links"> <?php echo HTML::anchor("news/newsection", "Add Section", array("class" => "nav-a")); ?>
+        <div class="comment-reply-form-container quick-section-add-form hidden quick-form"> <?php echo View::factory("application/newsection"); ?> </div>                           
+    </li>
+    
+  <? endif; ?>
   <? if ($logged_user->is_loggedin) : ?>    
     <li class="menu-links">    <?php echo HTML::anchor("news/add", "Add News", array("class" => "nav-a")); ?>
       <div class="comment-reply-form-container quick-news-add-form hidden quick-form"> <?php echo View::factory("news/add"); ?> </div>                           

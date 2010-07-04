@@ -10,6 +10,10 @@ class Controller_Base extends Controller_Template {
     public $template = 'application/template';
     public $session = null;
     public $accountutils;
+    public static $FORM_ERRORS = "form-errors";
+    public static $ERRORS = "errors";
+    public static $MESSAGES = "messages";
+    public static $WARNINGS = "warnings";
 
     /**
      * The before() method is called before your controller action.
@@ -17,13 +21,13 @@ class Controller_Base extends Controller_Template {
      * set up default values. These variables are then available to our
      * controllers if they need to be modified.
      */
-    public function before() {        
+    public function before() {
         parent::before();
         $this->session = Session::instance();
         $this->accountutils = new accountutils();
         $this->logged_in = $this->session->get("authorized", false);
         $this->logged_user = $this->session->get("user", Mango::factory("user"));
-        
+
         if ($this->auto_render) {
             // Initialize empty values
             $this->template->title = '';
@@ -31,8 +35,9 @@ class Controller_Base extends Controller_Template {
 
             $this->template->styles = array();
             $this->template->scripts = array();
-             $this->template->user_saved = array();
-             $this->template->logged_user = $this->logged_user;
+            $this->template->user_saved = array();
+            $this->template->logged_user = $this->logged_user;
+            $this->template->sections = Mango::factory("section")->load(NULL); //TODO, user subscribed Sections
         }
     }
 
@@ -67,7 +72,6 @@ class Controller_Base extends Controller_Template {
             $this->template->form_errors = $this->session->get("form_errors", array());
             $this->session->set("messages", array());
             $this->session->set("form_errors", array());
-
         }
         //todo if Ajax Header then echo $this->template->content and not the entire template
         parent::after();
@@ -76,7 +80,7 @@ class Controller_Base extends Controller_Template {
     protected function add_message($message, $type) {
         $messages = $this->session->get("messages", Array());
         $form_errors = $this->session->get("form_errors", array());
-        if ($type != "form-errors") {
+        if ($type != Controller_Base::$FORM_ERRORS) {
             if (!isset($messages[$type])) {
                 $messages[$type] = Array();
             }
@@ -84,19 +88,18 @@ class Controller_Base extends Controller_Template {
             $this->session->set("messages", $messages);
         } else {
             $form_errors[] = $message;
-             $this->session->set("form_errors", $form_errors);
+            $this->session->set("form_errors", $form_errors);
         }
     }
-    
-    protected function mongoId2Array($mong, $field="_id"){
-      $ret = array();
-      foreach($mong as $m) {
-        $ret[] = "".$m->{$field};
-      }
-      return $ret;
+
+    protected function mongoId2Array($mong, $field="_id") {
+        $ret = array();
+        foreach ($mong as $m) {
+            $ret[] = "" . $m->{$field};
+        }
+        return $ret;
     }
-    
-     
 
 }
+
 ?>

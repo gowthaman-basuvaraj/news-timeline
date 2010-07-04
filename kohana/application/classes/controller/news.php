@@ -2,15 +2,42 @@
 
 class Controller_news extends Controller_Base {
 
-  public function action_index() {
-    
+  public function action_index($section_name = null) {
+    echo $section_name;
   }
 
   public function action_item() {
     
   }
+  public function action_newsection(){
+      if(Request::$method=="POST"){
+          $values = array();
+          if(isset($_POST['section_name'])){
+              $values['name'] = trim($_POST['section_name']);
+          }
+          if(isset($_POST['section_title'])){
+              $values['title'] = trim($_POST['section_title']);
+          }
+          if(isset($_POST['section_desc'])){
+              $values['description'] = trim($_POST['section_desc']);
+          }
+          if(count($values)>1){
+              try {
+                  $section = Mango::factory("section");
+                $values = $section->check($values);
+                $section->values($values)->create();
+                $this->request->redirect("news/$section->name");
+              }catch(Validate_Exception $except){
+                $this->add_message($except->array->errors(), Controller_Base::$FORM_ERRORS);                  
+                return;
+              }
+          }
+      }
+      $this->template->content = View::factory("application/newsection");
+      
+  }
 
-  public function action_add($story_urltitle=NULL) {
+  public function action_add($section_name=null,$story_urltitle=NULL) {
     $news = Mango::factory("story");
     if ($story_urltitle != NULL) {
 
@@ -64,6 +91,9 @@ class Controller_news extends Controller_Base {
         }
         $values["daystory_id"] = $tdy_news->_id . "";
         $values['description'] = nl2br($values['description']);
+        if($section_name != null){
+            $values['section_name'] = $section_name;
+        }
         if ($original_story != NULL) {
           $values['story_id'] = $original_story->_id . "";
           $values['story_depth'] = $original_story->story_depth + 1;

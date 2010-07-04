@@ -91,7 +91,7 @@ class Kohana_URL {
 		}
 
 		// Concat the URL
-		return URL::base(TRUE, $protocol).$path.$query.$fragment;
+		return URL::base(FALSE, $protocol).$path.$query.$fragment;
 	}
 
 	/**

@@ -50,5 +50,9 @@ return array(
         'hostnames' => 'localhost',
         'database' => 'news_tweets',
         'profiling' => FALSE
+    ), 'news_sections' => array(
+        'hostnames' => 'localhost',
+        'database' => 'news_sections',
+        'profiling' => FALSE
     )
 );
